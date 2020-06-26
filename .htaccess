@@ -29,5 +29,5 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_URI} !^/public/
-    RewriteRule ^(css|js|images|uploads|avatar|logo|themes|property)/(.*)$ public/$1/$2 [L,NC]
+    RewriteRule ^(css|js|images|uploads|default|avatar|logo|themes|property|assets)/(.*)$ public/$1/$2 [L,NC]
 </IfModule>

@@ -76,6 +76,7 @@
                                     <li><a href="javascript:void(0)"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>rooms</span></div></a></li>
                                     <li><a href="javascript:void(0)"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>news</span></div></a></li>
                                     <li><a href="javascript:void(0)"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>contact</span></div></a></li>
+                                    <li><a href="{{url('login')}}"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span title="Login"><i class="fa fa-sign-in"></i></span></div></a></li>
                                 </ul>
                             </nav>
                             <a href="#" class="button_container header_button ml-auto"><div class="button text-center"><span>Book Your Stay</span></div></a>
@@ -99,6 +100,7 @@
                 <li><a href="javascript:void(0)">Rooms</a></li>
                 <li><a href="javascript:void(0)">News</a></li>
                 <li><a href="javascript:void(0)">Contact</a></li>
+                <li><a href="{{url('login')}}"><i class="fa fa-sign-in"></i> Login</a></li>
             </ul>
             <div class="menu_review"><a href="#">Add your review</a></div>
         </div>
@@ -147,10 +149,22 @@
                 <div class="col-lg-4 footer_col">
                     <div class="footer_contact clearfix">
                         <div class="footer_contact_content float-lg-right">
+                            @php
+                            $contactDetail = \App\Model\Admin::find(1);
+                            @endphp
                             <ul>
-                                <li>Address: <span>Shankharapur, Kathmandu, Nepali</span></li>
-                                <li>Phone: <span>+977 XXXXXXXXXX</span></li>
-                                <li>Email: <span>example@mail.com</span></li>
+                                <li>
+                                    <span class="text-primary">{{$contactDetail->name}}</span>
+                                    @if(\Illuminate\Support\Facades\Auth::check())
+                                        @if(\Illuminate\Support\Facades\Auth::user()->type=='admin')
+                                            <a href="{{url('admin/profile-manage/edit-profile')}}" class="badge badge-info"><i class="fa fa-edit"></i> Edit Info</a>
+                                        @endif
+                                    @endif
+                                </li>
+                                <li><i class="fa fa-map text-danger"></i> <span>{{$contactDetail->address}}</span></li>
+                                <li><i class="fa fa-phone text-danger"></i> <span>{{$contactDetail->tel1}} {{$contactDetail->tel2}}</span></li>
+                                <li><i class="fa fa-phone-square text-danger"></i> <span>{{$contactDetail->mobile1}}</span></li>
+                                <li><i class="fa fa-envelope text-danger"></i> <span>{{$contactDetail->email1}}</span></li>
                             </ul>
                         </div>
                     </div>

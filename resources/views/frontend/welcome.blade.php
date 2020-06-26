@@ -121,6 +121,13 @@
             <div class="row row-lg-eq-height">
 
                 <!-- Intro Content -->
+                <div class="col-lg-12">
+                    <div style="width:50%; margin:0 auto;">
+                        <div class="row">
+                            @include('layouts.notification')
+                        </div>
+                    </div>
+                </div>
                 <div class="col-lg-5 intro_col">
                     <div class="intro_container d-flex flex-column align-items-start justify-content-center magic_up">
                         <div class="intro_content">
