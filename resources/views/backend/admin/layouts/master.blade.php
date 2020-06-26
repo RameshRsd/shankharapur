@@ -118,6 +118,24 @@
                         </a>
                         <ul class="nav-main-submenu">
                             <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('3')=='cities') active @endif" href="{{url('admin/location-manage/cities')}}">
+                                    <i class="nav-main-link-icon fa fa-arrow-alt-circle-right"></i>
+                                    <span class="nav-main-link-name">Cities</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('3')=='districts') active @endif" href="{{url('admin/location-manage/districts')}}">
+                                    <i class="nav-main-link-icon fa fa-arrow-alt-circle-right"></i>
+                                    <span class="nav-main-link-name">Districts</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('3')=='states') active @endif" href="{{url('admin/location-manage/states')}}">
+                                    <i class="nav-main-link-icon fa fa-arrow-alt-circle-right"></i>
+                                    <span class="nav-main-link-name">State</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
                                 <a class="nav-main-link @if(request()->segment('3')=='countries') active @endif" href="{{url('admin/location-manage/countries')}}">
                                     <i class="nav-main-link-icon fa fa-arrow-alt-circle-right"></i>
                                     <span class="nav-main-link-name">Country</span>

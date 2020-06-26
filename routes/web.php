@@ -42,8 +42,24 @@ Route::group(['namespace'=>'backend'],function(){
             Route::get('countries','CountryController@index');
             Route::post('countries','CountryController@store');
             Route::post('countries/{id}/update','CountryController@update');
+
+            Route::get('states','StateController@index');
+            Route::post('states','StateController@store');
+            Route::post('states/{id}/update','StateController@update');
+
+            Route::get('districts','DistrictController@index');
+            Route::post('districts','DistrictController@store');
+            Route::post('districts/{id}/update','DistrictController@update');
+
+            Route::get('cities','CityController@index');
+            Route::post('cities','CityController@store');
+            Route::post('cities/{id}/update','CityController@update');
+
         });
 
+        Route::get('get_state','AjaxController@getState');
+        Route::get('get_district','AjaxController@getDistrict');
+        Route::get('get_city','AjaxController@getCity');
     });
 
 });
