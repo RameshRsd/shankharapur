@@ -54,6 +54,23 @@ class DistrictController extends Controller
         return back()->with('success','Record added successfully !');
     }
 
+    public function edit(Request $request,$id){
+        $user = Auth::user();
+        $admin = $user->admin;
+        $name = $admin->name;
+        $title = 'Districts - Location Manage - Admin Panel | '.$name;
+        $district = District::findOrFail($id);
+        $countries = Country::all();
+        $state = State::orderBy('name');
+        if ($request->country_id){
+            $state->where('country_id',$request->country_id);
+        }else{
+            $state->where('country_id',1);
+        }
+        $states = $state->get();
+        return view('backend.admin.location.district.edit',compact('title','district','countries','states'));
+    }
+
     public function update(Request $request,$id){
         $this->validate($request,[
             'name' => 'required|unique:districts,name,'.$id,
@@ -63,7 +80,7 @@ class DistrictController extends Controller
         $district->name = $request->name;
         $district->state_id = $request->state_id;
         $district->save();
-        return back()->with('success','Record updated successfully !');
+        return redirect('admin/location-manage/districts')->with('success','Record updated successfully !');
     }
 
 }

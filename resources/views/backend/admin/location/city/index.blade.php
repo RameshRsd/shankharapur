@@ -26,15 +26,28 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 form-group">
+                                <div class="col-sm-3 form-group">
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputGroup-sizing-default">State</span>
                                         </div>
-                                        <select name="state_id" id="state_id" class="form-control" onchange="javascript:this.form.submit();">
+                                        <select name="state_id" class="form-control" onchange="javascript:this.form.submit();">
                                             <option value="">--Choose--</option>
                                             @foreach($states as $state)
                                                 <option value="{{$state->id}}" @if(request('state_id')==$state->id) selected @endif>{{$state->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroup-sizing-default">District</span>
+                                        </div>
+                                        <select name="district_id" class="form-control" onchange="javascript:this.form.submit();">
+                                            <option value="">--Choose--</option>
+                                            @foreach($districts as $district)
+                                                <option value="{{$district->id}}" @if(request('district_id')==$district->id) selected @endif>{{$district->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -79,6 +92,7 @@
                                     <tr>
                                         <th>SN</th>
                                         <th>Name</th>
+                                        <th>District</th>
                                         <th>State</th>
                                         <th>Country</th>
                                         <th>Action</th>
@@ -88,17 +102,17 @@
                                     @foreach($cities as $key=>$city)
                                         <tr>
                                             <td>{{++$key}}</td>
-                                            <td>{{$city->name}}</td>
+                                            <td>{{$city->name}} {{$city->type}}</td>
                                             <td>{{$city->district->name}}</td>
                                             <td>{{$city->district->state->name}}</td>
                                             <td>{{$city->district->state->country->name}}</td>
                                             <td>
-                                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#editCity{{$city->id}}"><i class="fa fa-edit"></i></button>
+                                                <a href="{{url()->current().'/'.$city->id.'/edit'}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
                                     <tr>
-                                        <th colspan="5">
+                                        <th colspan="6">
                                             {{$cities->appends(['per_page'=>request('per_page')])->appends(['order'=>request('order')])->appends(['state_id'=>request('state_id')])->links()}}
                                         </th>
                                     </tr>
@@ -113,10 +127,10 @@
     <!-- END Page Content -->
 
     <div class="modal fade" id="addCity" tabindex="-1" role="dialog" aria-labelledby="modal-default-popout" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-popout" role="document">
+        <div class="modal-dialog modal-lg modal-dialog-popout" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
-                    <h5 class="modal-title text-white">Add District</h5>
+                    <h5 class="modal-title text-white">Add City</h5>
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -127,7 +141,7 @@
                         <div class="block-content block-content-full bg-white">
                             <!-- Header -->
                             <div class="text-center">
-                                <p class="text-uppercase font-w700 font-size-sm text-muted">Add District</p>
+                                <p class="text-uppercase font-w700 font-size-sm text-muted">Add City</p>
                             </div>
                             <!-- END Header -->
 
@@ -142,7 +156,7 @@
                                                         Country<span class="text-danger">*</span>
                                                     </span>
                                                 </div>
-                                                <select name="country_id" id="country_id_add" class="form-control" required="">
+                                                <select name="country_id" id="country_id" class="form-control" required>
                                                     <option value="">--Choose--</option>
                                                     @foreach($countries as $country)
                                                         <option value="{{$country->id}}" @if(1==$country->id) selected @endif>{{$country->name}}</option>
@@ -151,7 +165,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
@@ -159,28 +173,65 @@
                                                         State<span class="text-danger">*</span>
                                                     </span>
                                                 </div>
-                                                <select name="state_id" id="state_id_add" class="form-control" required>
+                                                <select name="state_id" id="state_id" class="form-control" required>
                                                     <option value="">--Choose--</option>
                                                     @foreach($states as $state)
-                                                        <option value="{{$state->id}}">{{$state->name}}</option>
+                                                        <option value="{{$state->id}}" @if(request('state_id')==$state->id) selected @endif>{{$state->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        District<span class="text-danger">*</span>
+                                                    </span>
+                                                </div>
+                                                <select name="district_id" id="district_id" class="form-control" required>
+                                                    <option value="">--Choose--</option>
+                                                    @foreach($districts as $district)
+                                                        <option value="{{$district->id}}" @if(request('district_id')==$district->id) selected @endif>{{$district->name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">
-                                                        District Name<span class="text-danger">*</span>
+                                                        City Name<span class="text-danger">*</span>
                                                     </span>
                                                 </div>
                                                 <input type="text" class="form-control" id="example-group1-input1" name="name" required>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        Type<span class="text-danger">*</span>
+                                                    </span>
+                                                </div>
+                                                <select name="type" class="form-control" required>
+                                                    <option value="">--Choose--</option>
+                                                    <option value="Metropolitan City">Metropolitan City</option>
+                                                    <option value="Sub-Metropolitan City">Sub-Metropolitan City</option>
+                                                    <option value="Municipality">Municipality</option>
+                                                    <option value="Rural Municipality">Rural Municipality</option>
+                                                    <option value="VDC">VDC</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                                 <div class="form-group text-center mb-0">
                                     <button type="submit" class="btn btn-hero-primary">
@@ -201,32 +252,33 @@
 @endsection
 @section('script')
     <script>
-        $('#country_id_add').on('change', function(e){
+        $('#country_id').on('change', function(e){
             console.log(e);
             var district_id = e.target.value;
             $.get('{{url('admin')}}/get_state?country_id=' + district_id,function(data) {
                 console.log(data);
-                $('#state_id_add').empty();
-                $('#state_id_add').append('<option value="0" disable="true" selected="true">--Choose--</option>');
+                $('#state_id').empty();
+                $('#district_id').empty();
+                $('#state_id').append('<option value="0" disable="true" selected="true">--Choose--</option>');
 
                 $.each(data, function(index, state){
-                    $('#state_id_add').append('<option value="'+ state.id +'">'+ state.name +'</option>');
+                    $('#state_id').append('<option value="'+ state.id +'">'+ state.name +'</option>');
                 })
             });
         });
     </script>
 
     <script>
-        $('#country_id_edit').on('change', function(e){
+        $('#state_id').on('change', function(e){
             console.log(e);
-            var district_id = e.target.value;
-            $.get('{{url('admin')}}/get_state?country_id=' + district_id,function(data) {
+            var state_id = e.target.value;
+            $.get('{{url('admin')}}/get_district?state_id=' + state_id,function(data) {
                 console.log(data);
-                $('#country_id_edit').empty();
-                $('#country_id_edit').append('<option value="0" disable="true" selected="true">--Choose--</option>');
+                $('#district_id').empty();
+                $('#district_id').append('<option value="0" disable="true" selected="true">--Choose--</option>');
 
-                $.each(data, function(index, state){
-                    $('#country_id_edit').append('<option value="'+ state.id +'">'+ state.name +'</option>');
+                $.each(data, function(index, district){
+                    $('#district_id').append('<option value="'+ district.id +'">'+ district.name +'</option>');
                 })
             });
         });

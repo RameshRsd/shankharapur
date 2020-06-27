@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend\admin;
 
 use App\Http\Controllers\Controller;
 use App\Model\City;
+use App\Model\District;
 use App\Model\Guest;
 use App\Model\RoomBook;
 use App\Model\RoomCheck;
@@ -19,7 +20,7 @@ class AjaxController extends Controller
     }
 
     public function getDistrict(Request $request){
-        $districts = State::where('state_id',$request->state_id)->orderBy('name')->get();
+        $districts = District::where('state_id',$request->state_id)->orderBy('name')->get();
         return response()->json($districts);
     }
 

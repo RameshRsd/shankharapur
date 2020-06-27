@@ -49,11 +49,13 @@ Route::group(['namespace'=>'backend'],function(){
 
             Route::get('districts','DistrictController@index');
             Route::post('districts','DistrictController@store');
-            Route::post('districts/{id}/update','DistrictController@update');
+            Route::get('districts/{id}/edit','DistrictController@edit');
+            Route::post('districts/{id}/edit','DistrictController@update');
 
             Route::get('cities','CityController@index');
             Route::post('cities','CityController@store');
-            Route::post('cities/{id}/update','CityController@update');
+            Route::get('cities/{id}/edit','CityController@edit');
+            Route::post('cities/{id}/edit','CityController@update');
 
         });
 
