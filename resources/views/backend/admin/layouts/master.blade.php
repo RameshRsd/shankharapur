@@ -91,11 +91,25 @@
                         </ul>
                     </li>
                     <li class="nav-main-heading">Guest Manage</li>
-                    <li class="nav-main-item @if(request()->segment('2')=='guests') open @endif">
-                        <a class="nav-main-link @if(request()->segment('2')=='guests') active @endif" href="{{url('admin/guests')}}">
+                    <li class="nav-main-item  @if(request()->segment('2')=='guest-manage') open @endif">
+                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="{{url('admin/profile-manage')}}">
                             <i class="nav-main-link-icon fa fa-user"></i>
-                            <span class="nav-main-link-name">Guests</span>
+                            <span class="nav-main-link-name">Guest Manage</span>
                         </a>
+                        <ul class="nav-main-submenu">
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('3')=='guests') active @endif" href="{{url('admin/guest-manage/guests')}}">
+                                    <i class="nav-main-link-icon fa fa-list-alt"></i>
+                                    <span class="nav-main-link-name">Guest List</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('3')=='add-guest') active @endif" href="{{url('admin/guest-manage/add-guest')}}">
+                                    <i class="nav-main-link-icon fa fa-plus-circle"></i>
+                                    <span class="nav-main-link-name">New Guest</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-main-heading">Room Manage</li>
                     <li class="nav-main-item @if(request()->segment('2')=='accommodations') open @endif">
