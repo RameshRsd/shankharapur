@@ -35,7 +35,11 @@ Route::group(['namespace'=>'backend'],function(){
             Route::post('changePassword','ProfileController@changePassword');
             Route::post('updatePhoto','ProfileController@updatePhoto');
         });
-        Route::get('guests','GuestController@index');
+        Route::group(['prefix'=>'guest-manage','namespace'=>'guest'],function (){
+            Route::get('','GuestController@index');
+            Route::get('guests','GuestController@guestList');
+            Route::get('add-guest','GuestController@create');
+        });
 
         Route::group(['prefix'=>'location-manage','namespace'=>'location'],function (){
             Route::get('','LocationController@index');
