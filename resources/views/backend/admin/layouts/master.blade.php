@@ -301,143 +301,130 @@
         </main>
         <!-- END Main Container -->
 
-        <!-- Footer -->
-        <footer id="page-footer" class="bg-body">
-            <div class="content py-0">
-                <div class="row font-size-sm">
-                    <div class="col-sm-6 order-sm-2 mb-1 mb-sm-0 text-center text-sm-right">
-                        Developed <i class="fa fa-heart text-danger"></i> by <a class="font-w600" href="https://www.facebook.com/gsn.np" target="_blank">Genius Service Nepal Pvt. Ltd.</a>
+        <!-- changePassword Modal -->
+        <div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="modal-default-popout" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-popout" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                        <h5 class="modal-title text-white">Change Password</h5>
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    <div class="col-sm-6 order-sm-1 text-center text-sm-left">
-                        <a class="font-w600" href="{{url('')}}">Admin</a> &copy; <span>{{date('Y')}}</span>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- END Footer -->
-    </div>
-    <!-- changePassword Modal -->
-    <div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="modal-default-popout" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-popout" role="document">
-            <div class="modal-content">
-                <div class="modal-header bg-primary">
-                    <h5 class="modal-title text-white">Change Password</h5>
-                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body pb-1">
+                    <div class="modal-body pb-1">
 
-                    <div class="block block-transparent block-rounded w-100 mb-0 overflow-hidden">
-                        <div class="block-content block-content-full bg-white">
-                            <!-- Header -->
-                            <div class="text-center">
-                                <p class="text-uppercase font-w700 font-size-sm text-muted">Change Password</p>
-                            </div>
-                            <!-- END Header -->
+                        <div class="block block-transparent block-rounded w-100 mb-0 overflow-hidden">
+                            <div class="block-content block-content-full bg-white">
+                                <!-- Header -->
+                                <div class="text-center">
+                                    <p class="text-uppercase font-w700 font-size-sm text-muted">Change Password</p>
+                                </div>
+                                <!-- END Header -->
 
-                            <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
-                            <form class="js-validation-signin" action="{{url('admin/profile-manage/changePassword')}}" method="POST">{{csrf_field()}}
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
+                                <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
+                                <form class="js-validation-signin" action="{{url('admin/profile-manage/changePassword')}}" method="POST">{{csrf_field()}}
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
                                                     <span class="input-group-text">
                                                         New Password <span class="text-danger">*</span>
                                                     </span>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="example-group1-input1" name="password" required>
                                                 </div>
-                                                <input type="text" class="form-control" id="example-group1-input1" name="password" required>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
                                                     <span class="input-group-text">
                                                         Re-Type New Password <span class="text-danger">*</span>
                                                     </span>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="example-group1-input1" name="password_confirmation" required>
                                                 </div>
-                                                <input type="text" class="form-control" id="example-group1-input1" name="password_confirmation" required>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group text-center mb-0">
-                                    <button type="submit" class="btn btn-hero-primary">
-                                        <i class="fa fa-fw fa-save mr-1"></i> Change Now
-                                    </button>
-                                </div>
-                            </form>
+                                    <div class="form-group text-center mb-0">
+                                        <button type="submit" class="btn btn-hero-primary">
+                                            <i class="fa fa-fw fa-save mr-1"></i> Change Now
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- changePassword Modal -->
+        <!-- changePassword Modal -->
 
-    <!-- Update Photo Modal -->
-    <div class="modal fade" id="updatePhoto" tabindex="-1" role="dialog" aria-labelledby="modal-default-popout" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-popout" role="document">
-            <div class="modal-content">
-                <div class="modal-header bg-primary">
-                    <h5 class="modal-title text-white">Update Photo</h5>
-                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body pb-1">
+        <!-- Update Photo Modal -->
+        <div class="modal fade" id="updatePhoto" tabindex="-1" role="dialog" aria-labelledby="modal-default-popout" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-popout" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                        <h5 class="modal-title text-white">Update Photo</h5>
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body pb-1">
 
-                    <div class="block block-transparent block-rounded w-100 mb-0 overflow-hidden">
-                        <div class="block-content block-content-full bg-white">
-                            <!-- Header -->
-                            <div class="text-center">
-                                <p class="text-uppercase font-w700 font-size-sm text-muted">Update Photo</p>
-                            </div>
-                            <!-- END Header -->
+                        <div class="block block-transparent block-rounded w-100 mb-0 overflow-hidden">
+                            <div class="block-content block-content-full bg-white">
+                                <!-- Header -->
+                                <div class="text-center">
+                                    <p class="text-uppercase font-w700 font-size-sm text-muted">Update Photo</p>
+                                </div>
+                                <!-- END Header -->
 
-                            <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
-                            <form class="js-validation-signin" action="{{url('admin/profile-manage/updatePhoto')}}" method="POST" enctype="multipart/form-data">{{csrf_field()}}
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="text-center mb-2 p2 bg-white" style="width: 40%; margin: 0 auto;">
-                                            <img class="img-avatar img-avatar-thumb bg-white" id="logoDisplay" src="{{asset('default'.'/'.\Illuminate\Support\Facades\Auth::user()->photo)}}" alt="">
+                                <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
+                                <form class="js-validation-signin" action="{{url('admin/profile-manage/updatePhoto')}}" method="POST" enctype="multipart/form-data">{{csrf_field()}}
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="text-center mb-2 p2 bg-white" style="width: 40%; margin: 0 auto;">
+                                                <img class="img-avatar img-avatar-thumb bg-white" id="logoDisplay" src="{{asset('default'.'/'.\Illuminate\Support\Facades\Auth::user()->photo)}}" alt="">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
                                                     <span class="input-group-text">
                                                         Choose File <span class="text-danger">*</span>
                                                     </span>
+                                                    </div>
+                                                    <input type="file" onchange="logoURL(this);" class="form-control" id="example-group1-input1" name="photo" required>
                                                 </div>
-                                                <input type="file" onchange="logoURL(this);" class="form-control" id="example-group1-input1" name="photo" required>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group text-center mb-0">
-                                    <button type="submit" class="btn btn-hero-primary">
-                                        <i class="fa fa-fw fa-save mr-1"></i> Update Now
-                                    </button>
-                                </div>
-                            </form>
+                                    <div class="form-group text-center mb-0">
+                                        <button type="submit" class="btn btn-hero-primary">
+                                            <i class="fa fa-fw fa-save mr-1"></i> Update Now
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
+        <!-- Update Photo Modal -->
+
     </div>
-    <!-- Update Photo Modal -->
 
 @endsection
 @section('script')

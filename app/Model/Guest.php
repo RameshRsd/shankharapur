@@ -22,4 +22,7 @@ class Guest extends Model
     public function city(){
         return $this->belongsTo(City::class,'city_id');
     }
+    public function roomChecks(){
+        return $this->hasMany(RoomCheck::class,'guest_id');
+    }
 }

@@ -31,7 +31,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroup-sizing-default">Guest Name</span>
                                     </div>
-                                    <input type="text" name="name" class="form-control" onchange="javascript:this.form.submit();">
+                                    <input type="text" name="name" value="{{request('name')}}" class="form-control" onchange="javascript:this.form.submit();">
                                 </div>
                             </div>
                             <div class="col-sm-3 form-group">
@@ -86,6 +86,7 @@
                             <thead>
                             <tr>
                                 <th>SN</th>
+                                <th>#</th>
                                 <th>Guest Name</th>
                                 <th>ID No.</th>
                                 <th>Address</th>
@@ -97,17 +98,33 @@
                             @foreach($guests as $key=>$guest)
                                 <tr>
                                     <td>{{++$key}}</td>
-                                    <td>{{$guest->first_name}} {{$guest->middle_name}} {{$guest->last_name}}</td>
-                                    <td>{{$guest->id_no}} <span class="badge badge-light">{{$guest->id_type}}</span></td>
-                                    <td><span class="badge badge-light">{{$guest->city->name}}-{{$guest->ward_no}},{{$guest->district->name}}</span></td>
-                                    <td></td>
                                     <td>
-                                        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-user-edit"></i></a>
+                                        @if(is_file(public_path('guest/photos'.'/'.$guest->photo)) && file_exists(public_path('guest/photos'.'/'.$guest->photo)))
+                                            <img class="img-avatar img-avatar48" src="{{asset('guest/photos'.'/'.$guest->photo)}}" alt="">
+                                        @else
+                                            <img class="img-avatar img-avatar48" src="{{asset('default/avatar.jpg')}}" alt="">
+                                        @endif
+                                    </td>
+                                    <td>{{$guest->first_name}} {{$guest->middle_name}} {{$guest->last_name}}</td>
+                                    <td><span class="badge badge-light">{{$guest->id_no}} {{$guest->id_type}}</span></td>
+                                    <td><span class="badge badge-light">{{$guest->city->name}}-{{$guest->ward_no}},{{$guest->district->name}}</span></td>
+                                    <td>
+                                        @if(count($guest->roomChecks)>0)
+                                            @php
+                                            $lastStay = $guest->roomChecks()->orderBy('id','DESC')->first();
+                                            @endphp
+                                            <span class="badge badge-sccess">Stay in Room: {{$lastStay->room->room_no}} ({{$lastStay->room->accommodation->name}})</span>
+                                        @else
+                                            <span class="badge badge-warning">Not stay now</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{url()->current().'/'.$guest->id.'/edit'}}" class="btn btn-primary btn-sm"><i class="fa fa-user-edit"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
                             <tr>
-                                <th colspan="6">
+                                <th colspan="7">
                                     {{$guests->appends(['per_page'=>request('per_page')])->appends(['order'=>request('order')])->appends(['name'=>request('name')])->appends(['district_id'=>request('district_id')])->links()}}
                                 </th>
                             </tr>

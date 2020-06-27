@@ -6,7 +6,7 @@
 
         <!-- Cards -->
         <h2 class="content-heading">
-            <i class="fa fa-angle-right text-muted mr-1"></i> Guest Management | New Guest
+            <i class="fa fa-angle-right text-muted mr-1"></i> Guest Management | Edit Guest ({{$guest->first_name}})
         </h2>
         <div class="row">
             @include('layouts.notification')
@@ -26,7 +26,7 @@
                                             <tr class="text-center">
                                                 <th class="text-center">
                                                     <div class="text-center mb-2 p2 bg-white">
-                                                        <img class="img-avatar img-avatar-thumb bg-white" id="photoDisplay" src="{{asset('default/avatar.jpg')}}" alt="">
+                                                        <img class="img-avatar img-avatar-thumb bg-white" id="photoDisplay" src="{{asset('guest/photos'.'/'.$guest->photo)}}" alt="">
                                                     </div>
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
@@ -56,7 +56,7 @@
                                                 <select name="country_id" id="country_id" class="form-control">
                                                     <option value="">--Choose--</option>
                                                     @foreach($countries as $country)
-                                                        <option value="{{$country->id}}" @if(old('country_id')==$country->id) selected @endif>{{$country->name}}</option>
+                                                        <option value="{{$country->id}}" @if($guest->country_id==$country->id) selected @endif>{{$country->name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -69,15 +69,9 @@
                                                 </div>
                                                 <select name="state_id" id="state_id" class="form-control">
                                                     <option value="">--Choose--</option>
-                                                    @if(old('state_id') && old('country_id'))
-                                                        @php
-                                                            $country = \App\Model\Country::find(old('country_id'));
-                                                            $states = $country->states;
-                                                        @endphp
-                                                        @foreach($states as $state)
-                                                            <option value="{{$state->id}}" @if(old('state_id')==$state->id) selected @endif>{{$state->name}}</option>
-                                                        @endforeach
-                                                    @endif
+                                                    @foreach($states as $state)
+                                                        <option value="{{$state->id}}" @if($guest->state_id==$state->id) selected @endif>{{$state->name}}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                             <small class="text-danger">Not Found? </small><a href="javascript:void(0)" data-toggle="modal" data-target="#addState" class="badge badge-info"><i class="fa fa-plus-circle"></i> Add New</a>
@@ -89,15 +83,9 @@
                                                 </div>
                                                 <select name="district_id" id="district_id" class="form-control">
                                                     <option value="">--Choose--</option>
-                                                    @if(old('state_id') && old('district_id'))
-                                                        @php
-                                                            $state = \App\Model\State::find(old('state_id'));
-                                                            $districts = $state->districts;
-                                                        @endphp
                                                         @foreach($districts as $district)
-                                                            <option value="{{$district->id}}" @if(old('district_id')==$district->id) selected @endif>{{$district->name}}</option>
+                                                            <option value="{{$district->id}}" @if($guest->district_id==$district->id) selected @endif>{{$district->name}}</option>
                                                         @endforeach
-                                                    @endif
                                                 </select>
                                             </div>
                                             <small class="text-danger">Not Found? </small><a href="javascript:void(0)" data-toggle="modal" data-target="#addDistrict" class="badge badge-info"><i class="fa fa-plus-circle"></i> Add New</a>
@@ -109,15 +97,9 @@
                                                 </div>
                                                 <select name="city_id" id="city_id" class="form-control">
                                                     <option value="">--Choose--</option>
-                                                    @if(old('city_id') && old('district_id'))
-                                                        @php
-                                                            $district = \App\Model\District::find(old('district_id'));
-                                                            $cities = $district->cities;
-                                                        @endphp
                                                         @foreach($cities as $city)
-                                                            <option value="{{$city->id}}" @if(old('city_id')==$city->id) selected @endif>{{$city->name}} {{$city->type}}</option>
+                                                            <option value="{{$city->id}}" @if($guest->city_id==$city->id) selected @endif>{{$city->name}} {{$city->type}}</option>
                                                         @endforeach
-                                                    @endif
                                                 </select>
                                             </div>
                                             <small class="text-danger">Not Found? </small><a href="javascript:void(0)" data-toggle="modal" data-target="#addCity" class="badge badge-info"><i class="fa fa-plus-circle"></i> Add New</a>
@@ -128,7 +110,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="inputGroup-sizing-default">Tole</span>
                                                 </div>
-                                                <input type="text" name="tole" value="{{old('tole')}}" class="form-control">
+                                                <input type="text" name="tole" value="{{$guest->tole}}" class="form-control">
                                             </div>
                                         </div>
 
@@ -137,7 +119,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="inputGroup-sizing-default">Ward No.</span>
                                                 </div>
-                                                <input type="number" name="ward_no" value="{{old('ward_no')}}" class="form-control">
+                                                <input type="number" name="ward_no" value="{{$guest->ward_no}}" class="form-control">
                                             </div>
                                         </div>
 
@@ -146,7 +128,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="inputGroup-sizing-default">Mobile No. <span class="text-danger">*</span></span>
                                                 </div>
-                                                <input type="number" name="mobile1" value="{{old('mobile1')}}" class="form-control" required>
+                                                <input type="number" name="mobile1" value="{{$guest->mobile1}}" class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-4 form-group">
@@ -154,7 +136,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="inputGroup-sizing-default">Mobile No.</span>
                                                 </div>
-                                                <input type="number" name="mobile2" value="{{old('mobile2')}}" class="form-control" placeholder="(Optional)">
+                                                <input type="number" name="mobile2" value="{{$guest->mobile2}}" class="form-control" placeholder="(Optional)">
                                             </div>
                                         </div>
                                     </div>
@@ -171,7 +153,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="inputGroup-sizing-default">First Name <span class="text-danger">*</span></span>
                                                 </div>
-                                                <input type="text" name="first_name" value="{{old('first_name')}}" class="form-control" required>
+                                                <input type="text" name="first_name" value="{{$guest->first_name}}" class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-4 form-group">
@@ -179,7 +161,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="inputGroup-sizing-default">Middle Name</span>
                                                 </div>
-                                                <input type="text" name="middle_name" value="{{old('middle_name')}}" class="form-control">
+                                                <input type="text" name="middle_name" value="{{$guest->middle_name}}" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-sm-4 form-group">
@@ -187,7 +169,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="inputGroup-sizing-default">Last Name <span class="text-danger">*</span></span>
                                                 </div>
-                                                <input type="text" name="last_name" value="{{old('last_name')}}" class="form-control" required>
+                                                <input type="text" name="last_name" value="{{$guest->last_name}}" class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-4 form-group">
@@ -195,7 +177,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="inputGroup-sizing-default">Father Name</span>
                                                 </div>
-                                                <input type="text" name="father_name" value="{{old('father_name')}}" class="form-control">
+                                                <input type="text" name="father_name" value="{{$guest->father_name}}" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-sm-4 form-group">
@@ -203,7 +185,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="inputGroup-sizing-default">ID No. <span class="text-danger">*</span></span>
                                                 </div>
-                                                <input type="text" name="id_no" value="{{old('id_no')}}" class="form-control" required>
+                                                <input type="text" name="id_no" value="{{$guest->id_no}}" class="form-control" required>
                                             </div>
                                         </div>
 
@@ -213,12 +195,12 @@
                                                     <span class="input-group-text" id="inputGroup-sizing-default">ID Type <span class="text-danger">*</span></span>
                                                 </div>
                                                 <select name="id_type" id="id_type" class="form-control">
-                                                    <option value="Citizenship" @if(old('id_type')=='Citizenship') selected @endif>Citizenship</option>
-                                                    <option value="Driving" @if(old('id_type')=='Driving') selected @endif>Driving License</option>
-                                                    <option value="Pan-Card" @if(old('id_type')=='Pan-Card') selected @endif>Pan-Card</option>
-                                                    <option value="Passport" @if(old('id_type')=='Passport') selected @endif>Passport</option>
-                                                    <option value="Voter-Card" @if(old('id_type')=='Voter-Card') selected @endif>Voter-Card</option>
-                                                    <option value="Vehicle-No" @if(old('id_type')=='Vehicle-No') selected @endif>Vehicle-No</option>
+                                                    <option value="Citizenship" @if($guest->id_type=='Citizenship') selected @endif>Citizenship</option>
+                                                    <option value="Driving" @if($guest->id_type=='Driving') selected @endif>Driving License</option>
+                                                    <option value="Pan-Card" @if($guest->id_type=='Pan-Card') selected @endif>Pan-Card</option>
+                                                    <option value="Passport" @if($guest->id_type=='Passport') selected @endif>Passport</option>
+                                                    <option value="Voter-Card" @if($guest->id_type=='Voter-Card') selected @endif>Voter-Card</option>
+                                                    <option value="Vehicle-No" @if($guest->id_type=='Vehicle-No') selected @endif>Vehicle-No</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -232,7 +214,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text" id="inputGroup-sizing-default">Facebook Link.</span>
                                                             </div>
-                                                            <input type="url" name="facebook_link" value="{{old('facebook_link')}}" class="form-control">
+                                                            <input type="url" name="facebook_link" value="{{$guest->facebook_link}}" class="form-control">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4 form-group">
@@ -240,7 +222,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text" id="inputGroup-sizing-default">Twitter Link.</span>
                                                             </div>
-                                                            <input type="url" name="twitter_link" value="{{old('twitter_link')}}" class="form-control">
+                                                            <input type="url" name="twitter_link" value="{{$guest->twitter_link}}" class="form-control">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-4 form-group">
@@ -248,7 +230,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text" id="inputGroup-sizing-default">Instagram Link.</span>
                                                             </div>
-                                                            <input type="url" name="instagram_link" value="{{old('instagram_link')}}" class="form-control">
+                                                            <input type="url" name="instagram_link" value="{{$guest->instagram_link}}" class="form-control">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -259,7 +241,7 @@
                                 </div>
 
                             <div class="col-sm-12 text-center">
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Update</button>
                             </div>
                         </div>
                     </form>

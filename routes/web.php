@@ -39,6 +39,9 @@ Route::group(['namespace'=>'backend'],function(){
             Route::get('','GuestController@index');
             Route::get('guests','GuestController@guestList');
             Route::get('add-guest','GuestController@create');
+            Route::post('add-guest','GuestController@store');
+            Route::get('guests/{id}/edit','GuestController@edit');
+            Route::post('guests/{id}/edit','GuestController@update');
         });
 
         Route::group(['prefix'=>'location-manage','namespace'=>'location'],function (){
