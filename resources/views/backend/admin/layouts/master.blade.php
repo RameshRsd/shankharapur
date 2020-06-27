@@ -112,17 +112,51 @@
                         </ul>
                     </li>
                     <li class="nav-main-heading">Room Manage</li>
-                    <li class="nav-main-item @if(request()->segment('2')=='accommodations') open @endif">
-                        <a class="nav-main-link @if(request()->segment('3')=='accommodations') active @endif" href="{{url('admin/room-manage/accommodations')}}">
+                    <li class="nav-main-item  @if(request()->segment('2')=='accommodations') open @endif">
+                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="{{url('admin/accommodations')}}">
                             <i class="nav-main-link-icon fa fa-arrow-alt-circle-right"></i>
-                            <span class="nav-main-link-name">Accommodations</span>
+                            <span class="nav-main-link-name">Accommodation</span>
                         </a>
+                        <ul class="nav-main-submenu">
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('3')=='accommodation-list') active @endif" href="{{url('admin/accommodations/accommodation-list')}}">
+                                    <i class="nav-main-link-icon fa fa-list-alt"></i>
+                                    <span class="nav-main-link-name">List</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('3')=='add-accommodation') active @endif" href="{{url('admin/accommodations/add-accommodation')}}">
+                                    <i class="nav-main-link-icon fa fa-plus-circle"></i>
+                                    <span class="nav-main-link-name">Add New</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                    <li class="nav-main-item @if(request()->segment('2')=='rooms') open @endif">
-                        <a class="nav-main-link @if(request()->segment('3')=='rooms') active @endif" href="{{url('admin/room-manage/rooms')}}">
+                    <li class="nav-main-item  @if(request()->segment('2')=='room-manage') open @endif">
+                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="{{url('admin/room-manage')}}">
                             <i class="nav-main-link-icon fa fa-arrow-alt-circle-right"></i>
-                            <span class="nav-main-link-name">Room List</span>
+                            <span class="nav-main-link-name">Room Manage</span>
                         </a>
+                        <ul class="nav-main-submenu">
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('3')=='room-list') active @endif" href="{{url('admin/room-manage/room-list')}}">
+                                    <i class="nav-main-link-icon fa fa-list-alt"></i>
+                                    <span class="nav-main-link-name">Room List</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('3')=='add-room') active @endif" href="{{url('admin/room-manage/add-room')}}">
+                                    <i class="nav-main-link-icon fa fa-plus-circle"></i>
+                                    <span class="nav-main-link-name">Add New Room</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('3')=='room-features') active @endif" href="{{url('admin/room-manage/room-features')}}">
+                                    <i class="nav-main-link-icon fa fa-plus-circle"></i>
+                                    <span class="nav-main-link-name">Add Features</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-main-heading">Location Manage</li>
                     <li class="nav-main-item  @if(request()->segment('2')=='location-manage') open @endif">

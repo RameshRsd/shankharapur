@@ -44,6 +44,29 @@ Route::group(['namespace'=>'backend'],function(){
             Route::post('guests/{id}/edit','GuestController@update');
         });
 
+        Route::group(['prefix'=>'accommodations','namespace'=>'accommodation'],function (){
+            Route::get('','AccommodationController@index');
+            Route::get('accommodation-list','AccommodationController@getList');
+            Route::get('add-accommodation','AccommodationController@create');
+            Route::post('add-accommodation','AccommodationController@store');
+            Route::get('accommodation-list/{id}/edit','AccommodationController@edit');
+            Route::post('accommodation-list/{id}/edit','AccommodationController@update');
+        });
+
+        Route::group(['prefix'=>'room-manage','namespace'=>'rooms'],function (){
+            Route::get('','RoomController@index');
+            Route::get('room-list','RoomController@getList');
+            Route::get('add-room','RoomController@create');
+            Route::post('add-room','RoomController@store');
+            Route::get('room-list/{id}/edit','RoomController@edit');
+            Route::post('room-list/{id}/edit','RoomController@update');
+
+            Route::get('room-features','RoomController@roomFeatures');
+            Route::post('room-features','RoomController@roomFeaturesStore');
+            Route::post('room-features/{id}/update','RoomController@roomFeaturesUpdate');
+            Route::get('get_Data','RoomController@getData');
+        });
+
         Route::group(['prefix'=>'location-manage','namespace'=>'location'],function (){
             Route::get('','LocationController@index');
             Route::get('countries','CountryController@index');

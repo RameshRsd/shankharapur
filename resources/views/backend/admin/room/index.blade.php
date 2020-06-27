@@ -6,7 +6,7 @@
 
         <!-- Cards -->
         <h2 class="content-heading">
-            <i class="fa fa-angle-right text-muted mr-1"></i> Guest Management | Guest
+            <i class="fa fa-angle-right text-muted mr-1"></i> Room Management | Rooms List
         </h2>
         <div class="row">
             @include('layouts.notification')
@@ -18,7 +18,7 @@
                             <div class="col-sm-12">
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <label for="">Filter Guest <i class="fa fa-search"></i></label>
+                                        <label for="">Filter Rooms <i class="fa fa-search"></i></label>
                                         @if(request('order') || request('per_page') || request('name'))
                                             <br>
                                             <a href="{{url()->current()}}" class="badge badge-light"><i class="fa fa-times-circle"></i> Clear Search</a>
@@ -26,25 +26,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-4 form-group">
+                            <div class="col-sm-6 form-group">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroup-sizing-default">Guest Name</span>
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
                                     </div>
                                     <input type="text" name="name" value="{{request('name')}}" class="form-control" onchange="javascript:this.form.submit();">
-                                </div>
-                            </div>
-                            <div class="col-sm-3 form-group">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroup-sizing-default">District</span>
-                                    </div>
-                                    <select name="district_id" id="district_id" class="form-control" onchange="javascript:this.form.submit();">
-                                        <option value="">--Choose--</option>
-                                        @foreach($districts as $district)
-                                            <option value="{{$district->id}}" @if(request('district_id')==$district->id) selected @endif>{{$district->name}}</option>
-                                        @endforeach
-                                    </select>
                                 </div>
                             </div>
                             <div class="col-sm-3 form-group">
@@ -53,12 +40,12 @@
                                         <span class="input-group-text" id="inputGroup-sizing-default">Order By</span>
                                     </div>
                                     <select name="order" id="" class="form-control" onchange="javascript:this.form.submit();">
-                                        <option value="ASC" @if(request('order')=='ASC') selected @endif>A-Z</option>
-                                        <option value="DESC" @if(request('order')=='DESC') selected @endif>Z-A</option>
+                                        <option value="DESC" @if(request('order')=='DESC') selected @endif>Newest</option>
+                                        <option value="ASC" @if(request('order')=='ASC') selected @endif>Oldest</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2 form-group">
+                            <div class="col-md-3 form-group">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroup-sizing-default">No.</span>
@@ -80,52 +67,50 @@
                 <div class="border p-2 bg-white">
                     <div class="table-responsive">
                         <div class="button-section mb-2 text-right">
-                            <a href="{{url('admin/guest-manage/add-guest')}}" class="btn btn-primary pull-right"><i class="fa fa-plus-circle"></i> New Guest</a>
+                            <a href="{{url('admin/room-manage/add-room')}}" class="btn btn-primary pull-right"><i class="fa fa-plus-circle"></i> Add New</a>
                         </div>
                         <table class="table table-striped table-bordered table-vcenter">
                             <thead>
                             <tr>
                                 <th class="text-center">SN</th>
                                 <th class="text-center">#</th>
-                                <th>Guest Name</th>
-                                <th>ID No.</th>
-                                <th>Address</th>
-                                <th class="text-center">Status</th>
+                                <th>Name</th>
+                                <th class="text-center">Rate</th>
+                                <th class="text-center">Update By</th>
                                 <th class="text-center">Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($guests as $key=>$guest)
+                            @foreach($rooms as $key=>$room)
                                 <tr>
                                     <td class="text-center">{{++$key}}</td>
                                     <td class="text-center">
-                                        @if(is_file(public_path('guest/photos'.'/'.$guest->photo)) && file_exists(public_path('guest/photos'.'/'.$guest->photo)))
-                                            <img class="img-avatar img-avatar48" src="{{asset('guest/photos'.'/'.$guest->photo)}}" alt="">
+                                        @if(is_file(public_path('rooms/photos'.'/'.$room->image)) && file_exists(public_path('rooms/photos'.'/'.$room->image)))
+                                            <img class="img-avatar img-avatar48" src="{{asset('public/rooms/photos'.'/'.$room->image)}}" alt="">
                                         @else
                                             <img class="img-avatar img-avatar48" src="{{asset('default/avatar.jpg')}}" alt="">
                                         @endif
                                     </td>
-                                    <td>{{$guest->first_name}} {{$guest->middle_name}} {{$guest->last_name}}</td>
-                                    <td><span class="badge badge-light">{{$guest->id_no}} {{$guest->id_type}}</span></td>
-                                    <td><span class="badge badge-light">{{$guest->city->name}}-{{$guest->ward_no}},{{$guest->district->name}}</span></td>
+                                    <td>{{$room->name}}</td>
                                     <td class="text-center">
-                                        @if(count($guest->roomChecks)>0)
-                                            @php
-                                            $lastStay = $guest->roomChecks()->orderBy('id','DESC')->first();
-                                            @endphp
-                                            <span class="badge badge-sccess">Stay in Room: {{$lastStay->room->room_no}} ({{$lastStay->room->accommodation->name}})</span>
-                                        @else
-                                            <span class="badge badge-warning">Not stay now</span>
+                                        @if($room->rate_type=='Rupees')
+                                            Rs.
+                                            @else
+                                            $
                                         @endif
+                                            {{number_format($room->rate)}}/-
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{url()->current().'/'.$guest->id.'/edit'}}" class="btn btn-primary btn-sm"><i class="fa fa-user-edit"></i></a>
+                                        {{$room->user->name}}
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="{{url()->current().'/'.$room->id.'/edit'}}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
                             <tr>
                                 <th colspan="7">
-                                    {{$guests->appends(['per_page'=>request('per_page')])->appends(['order'=>request('order')])->appends(['name'=>request('name')])->appends(['district_id'=>request('district_id')])->links()}}
+                                    {{$rooms->appends(['per_page'=>request('per_page')])->appends(['order'=>request('order')])->appends(['name'=>request('name')])->links()}}
                                 </th>
                             </tr>
                             </tbody>

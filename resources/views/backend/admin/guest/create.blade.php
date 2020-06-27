@@ -30,9 +30,9 @@
                                                     </div>
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
-                                                    <span class="input-group-text">
-                                                        Choose Photo
-                                                    </span>
+                                                            <span class="input-group-text">
+                                                                Choose Photo
+                                                            </span>
                                                         </div>
                                                         <input type="file" onchange="photoURL(this);" class="form-control" id="example-group1-input1" name="photo">
                                                     </div>
