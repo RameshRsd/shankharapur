@@ -6,7 +6,7 @@
 
         <!-- Cards -->
         <h2 class="content-heading">
-            <i class="fa fa-angle-right text-muted mr-1"></i> Room Management | Add New
+            <i class="fa fa-angle-right text-muted mr-1"></i> Room Management | Edit Room <span class="badge badge-light">"{{$room->room_no}}"</span>
         </h2>
         <div class="row">
             @include('layouts.notification')
@@ -24,7 +24,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroup-sizing-default">Room No <span class="text-danger">*</span></span>
                                     </div>
-                                    <input type="text" name="room_no" value="{{old('room_no')}}" class="form-control" required>
+                                    <input type="text" name="room_no" value="{{$room->room_no}}" class="form-control" required>
                                 </div>
                             </div>
                             <div class="col-sm-6 form-group">
@@ -35,7 +35,7 @@
                                     <select name="accommodation_id" id="accommodation_id" class="form-control">
                                         <option value="">--Choose--</option>
                                         @foreach($accoms as $accom)
-                                            <option value="{{$accom->id}}" @if(old('accommodation_id')==$accom->id) selected @endif>{{$accom->name}}</option>
+                                            <option value="{{$accom->id}}" @if($room->accommodation_id==$accom->id) selected @endif>{{$accom->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -46,19 +46,19 @@
                                         <span class="input-group-text" id="inputGroup-sizing-default">Rate <span class="text-danger">*</span></span>
                                     </div>
                                     <select name="RoomRateType" id="RoomRateType" class="form-control">
-                                        <option value="same" @if(old('RoomRateType')=='same') selected @endif>Same as Accommodation</option>
-                                        <option value="different" @if(old('RoomRateType')=='different') selected @endif>Different as Accommodation</option>
+                                        <option value="same" @if($room->RoomRateType=='same') selected @endif>Same as Accommodation</option>
+                                        <option value="different" @if($room->RoomRateType=='different') selected @endif>Different as Accommodation</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-8" id="rate_area" @if(old('RoomRateType')=='different') @else style="display: none;" @endif>
+                            <div class="col-sm-8" id="rate_area" @if($room->RoomRateType=='different') @else style="display: none;" @endif>
                                 <div class="row">
                                     <div class="col-sm-6 form-group">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="inputGroup-sizing-default">Rate <span class="text-danger">*</span></span>
                                             </div>
-                                            <input type="text" name="rate" id="rate" value="{{old('rate')}}" class="form-control">
+                                            <input type="text" name="rate" id="rate" value="{{$room->rate}}" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-sm-6 form-group">
@@ -67,8 +67,8 @@
                                                 <span class="input-group-text" id="inputGroup-sizing-default">Rate Type</span>
                                             </div>
                                             <select name="rate_type" id="rate_type" class="form-control">
-                                                <option value="Rupees" @if(old('rate_type')=='Rupees') selected @endif>Rupees</option>
-                                                <option value="Dollor" @if(old('rate_type')=='Dollor') selected @endif>Dollor</option>
+                                                <option value="Rupees" @if($room->rate_type=='Rupees') selected @endif>Rupees</option>
+                                                <option value="Dollor" @if($room->rate_type=='Dollor') selected @endif>Dollor</option>
                                             </select>
                                         </div>
                                     </div>
@@ -81,7 +81,7 @@
                                     </div>
                                     <select name="floor_id" id="floor_id" class="form-control">
                                         @foreach($floors as $floor)
-                                            <option value="{{$floor->id}}" @if(old('floor_id')==$floor->id) selected @endif>{{$floor->name}}</option>
+                                            <option value="{{$floor->id}}" @if($room->floor_id==$floor->id) selected @endif>{{$floor->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -99,19 +99,28 @@
                             </div>
                             <div class="col-sm-12 form-group">
                                 <span class="font-weight-bold">About Room</span>
-                                <textarea name="details"  id="js-ckeditor"  class="form-control">{{old('details')}}</textarea>
+                                <textarea name="details"  id="js-ckeditor"  class="form-control">{{$room->details}}</textarea>
                             </div>
                             <div class="col-sm-12 form-group">
                                 <span>Room Features</span>
                                 <select name="feature_id[]" multiple id="feature_id" class="form-control js-select2" placeholder="Choose Features">
-                                    @foreach($features as $feature)
-                                        <option value="{{$feature->id}}">{{$feature->name}}</option>
+                                    @foreach(\App\Model\Feature::all() as $feature)
+                                        @php
+                                            $featureValues = \App\Model\RoomFeature::where('room_id',$room->id)->where('feature_id',$feature->id)->get();
+                                        @endphp
+                                        @if(count($featureValues)>0)
+                                            @foreach($featureValues as $featureValue)
+                                                <option value="{{$featureValue->feature_id}}" selected>{{$featureValue->feature->name}}</option>
+                                            @endforeach
+                                        @else
+                                            <option value="{{$feature->id}}">{{$feature->name}}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                                 <span class="badge badge-light">Not Found? </span> <a data-toggle="modal" data-target="#addFeature" href="javascript:void(0)" class="badge badge-info">Add Feature</a>
                             </div>
                             <div class="col-sm-12 text-center">
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Update</button>
                             </div>
                         </div>
                     </form>

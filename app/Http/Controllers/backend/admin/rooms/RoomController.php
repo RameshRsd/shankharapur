@@ -41,8 +41,100 @@ class RoomController extends Controller
         $title = 'Add New Room - Room Management - Admin Panel | '.$user->admin->name;
         $accoms = Accommodation::orderBy('name')->get();
         $floors = Floor::all();
-        return view('backend.admin.room.create',compact('title','accoms','floors'));
+        $features = Feature::all();
+        return view('backend.admin.room.create',compact('title','accoms','floors','features'));
     }
+    public function store(Request $request){
+        $this->validate($request,[
+            'room_no' => 'required|unique:rooms,room_no',
+            'accommodation_id' => 'required',
+            'floor_id' => 'required',
+            'RoomRateType' => 'required'
+        ]);
+
+        $room = new Room();
+        $room->user_id = Auth::user()->id;
+        $room->accommodation_id = $request->accommodation_id;
+        $room->room_no = $request->room_no;
+        $room->floor_id = $request->floor_id;
+        if ($request->RoomRateType=='same'){
+            $accom = Accommodation::findOrFail($request->accommodation_id);
+            $room->rate = $accom->rate;
+            $room->rate_type = $accom->rate_type;
+        }else{
+            $this->validate($request,[
+                'rate' => 'required',
+                'rate_type' => 'required',
+            ]);
+            $room->rate = $request->rate;
+            $room->rate_type = $request->rate_type;
+        }
+        $room->details = $request->details;
+        if ($request->hasFile('image')){
+            $totalAccoms = Room::count();
+            $randomChars = $totalAccoms.'-'.rand(100,1000);
+            $filename = $randomChars.'-'.request()->file('image')->getClientOriginalName();
+            request()->file('image')->move('public/rooms/photos'.'/',$filename);
+            $room->image =$filename;
+        }
+        $room->save();
+        if($request->feature_id){
+            $room->features()->sync($request->feature_id);
+        }
+        return redirect('admin/rooms/room-list')->with('success','Record saved successfully !');
+    }
+
+    public function edit($id){
+        $user = Auth::user();
+        $room = Room::findOrFail($id);
+        $title = $room->room_no.' - Edit Room - Room Management - Admin Panel | '.$user->admin->name;
+        $accoms = Accommodation::orderBy('name')->get();
+        $floors = Floor::all();
+        $features = Feature::all();
+        return view('backend.admin.room.edit',compact('title','accoms','floors','features','room'));
+    }
+    public function update(Request $request,$id){
+        $this->validate($request,[
+            'room_no' => 'required|unique:rooms,room_no,'.$id,
+            'accommodation_id' => 'required',
+            'floor_id' => 'required',
+            'RoomRateType' => 'required'
+        ]);
+
+        $room = Room::findOrFail($id);
+        $room->accommodation_id = $request->accommodation_id;
+        $room->room_no = $request->room_no;
+        $room->floor_id = $request->floor_id;
+        if ($request->RoomRateType=='same'){
+            $accom = Accommodation::findOrFail($request->accommodation_id);
+            $room->rate = $accom->rate;
+            $room->rate_type = $accom->rate_type;
+        }else{
+            $this->validate($request,[
+                'rate' => 'required',
+                'rate_type' => 'required',
+            ]);
+            $room->rate = $request->rate;
+            $room->rate_type = $request->rate_type;
+        }
+        $room->details = $request->details;
+        if ($request->hasFile('image')){
+            if (is_file(public_path('rooms/photos'.'/'.$room->photo)) && file_exists(public_path('rooms/photos'.'/'.$room->photo))){
+                unlink(public_path('rooms/photos'.'/'.$room->photo));
+            }
+            $totalAccoms = Room::count();
+            $randomChars = $totalAccoms.'-'.rand(100,1000);
+            $filename = $randomChars.'-'.request()->file('image')->getClientOriginalName();
+            request()->file('image')->move('public/rooms/photos'.'/',$filename);
+            $room->image =$filename;
+        }
+        $room->save();
+        if($request->feature_id){
+            $room->features()->sync($request->feature_id);
+        }
+        return redirect('admin/room-manage/room-list')->with('success','Record updated successfully !');
+    }
+
     public function roomFeatures(Request $request){
         $user = Auth::user();
         $title = 'Room Features - Room Management - Admin Panel | '.$user->admin->name;
