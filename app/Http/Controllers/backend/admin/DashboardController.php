@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend\admin;
 
 use App\Http\Controllers\Controller;
+use App\Model\Floor;
 use App\Model\Guest;
 use App\Model\RoomBook;
 use App\Model\RoomCheck;
@@ -24,6 +25,7 @@ class DashboardController extends Controller
         foreach ($todaySales as $todaySale){
             $rupees += $todaySale->rate;
         }
-        return view('backend.admin.index',compact('title','checkedin','roomBooked','guests','rupees'));
+        $floors = Floor::orderBy('id','ASC')->get();
+        return view('backend.admin.index',compact('title','checkedin','roomBooked','guests','rupees','floors'));
     }
 }

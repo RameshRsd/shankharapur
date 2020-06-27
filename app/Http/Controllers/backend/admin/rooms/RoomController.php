@@ -81,7 +81,7 @@ class RoomController extends Controller
         if($request->feature_id){
             $room->features()->sync($request->feature_id);
         }
-        return redirect('admin/rooms/room-list')->with('success','Record saved successfully !');
+        return redirect('admin/room-manage/room-list')->with('success','Record saved successfully !');
     }
 
     public function edit($id){
@@ -178,8 +178,41 @@ class RoomController extends Controller
         $feature->save();
         return back()->with('success','Feature updated successfully !');
     }
-    public function getData(Request $request){
-        $accoms = Accommodation::find($request->accommodation_id);
-        return response()->json($accoms);
+    public function floors(Request $request){
+        $user = Auth::user();
+        $title = 'Floors - Room Management - Admin Panel | '.$user->admin->name;
+        if($request->order){
+            $order=$request->order;
+        }else{
+            $order='DESC';
+        }
+        if($request->per_page){
+            $paginate=$request->per_page;
+        }else{
+            $paginate=10;
+        }
+        $floor = Floor::orderBy('id',$order);
+        $floors = $floor->simplePaginate($paginate);
+        return view('backend.admin.room.floors',compact('title','floors'));
+    }
+    public function floorsStore(Request $request){
+        $this->validate($request,[
+            'name' => 'required|unique:floors,name'
+        ]);
+        $floor = new Floor();
+        $floor->name = $request->name;
+        $floor->slug = Str::slug($request->name);
+        $floor->save();
+        return back()->with('success','Floor added successfully !');
+    }
+    public function floorsUpdate (Request $request,$id){
+        $this->validate($request,[
+            'name' => 'required|unique:floors,name,'.$id,
+        ]);
+        $floor = Floor::findOrFail($id);
+        $floor->name = $request->name;
+        $floor->slug = Str::slug($request->name);
+        $floor->save();
+        return back()->with('success','Floor updated successfully !');
     }
 }

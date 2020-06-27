@@ -91,7 +91,10 @@
                                             <img class="img-avatar img-avatar48" src="{{asset('default/avatar.jpg')}}" alt="">
                                         @endif
                                     </td>
-                                    <td>{{$room->name}}</td>
+                                    <td>
+                                        {{$room->accommodation->name}}<br>
+                                        <span class="badge badge-dark">Room No. :{{$room->room_no}}</span>
+                                    </td>
                                     <td class="text-center">
                                         @if($room->rate_type=='Rupees')
                                             Rs.

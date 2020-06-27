@@ -64,7 +64,10 @@ Route::group(['namespace'=>'backend'],function(){
             Route::get('room-features','RoomController@roomFeatures');
             Route::post('room-features','RoomController@roomFeaturesStore');
             Route::post('room-features/{id}/update','RoomController@roomFeaturesUpdate');
-            Route::get('get_Data','RoomController@getData');
+
+            Route::get('floors','RoomController@floors');
+            Route::post('floors','RoomController@floorsStore');
+            Route::post('floors/{id}/update','RoomController@floorsUpdate');
         });
 
         Route::group(['prefix'=>'location-manage','namespace'=>'location'],function (){
@@ -87,6 +90,11 @@ Route::group(['namespace'=>'backend'],function(){
             Route::get('cities/{id}/edit','CityController@edit');
             Route::post('cities/{id}/edit','CityController@update');
 
+        });
+
+        Route::group(['prefix'=>'rooms','namespace'=>'room_action'],function (){
+            Route::get('{id}/book','RoomBookController@book');
+            Route::post('{id}/book','RoomBookController@bookStore');
         });
 
         Route::get('get_state','AjaxController@getState');

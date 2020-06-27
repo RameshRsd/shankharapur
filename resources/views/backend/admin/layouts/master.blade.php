@@ -153,7 +153,13 @@
                             <li class="nav-main-item">
                                 <a class="nav-main-link @if(request()->segment('3')=='room-features') active @endif" href="{{url('admin/room-manage/room-features')}}">
                                     <i class="nav-main-link-icon fa fa-plus-circle"></i>
-                                    <span class="nav-main-link-name">Add Features</span>
+                                    <span class="nav-main-link-name">Add Room Features</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('3')=='floors') active @endif" href="{{url('admin/room-manage/floors')}}">
+                                    <i class="nav-main-link-icon fa fa-plus-circle"></i>
+                                    <span class="nav-main-link-name">Floor Manage</span>
                                 </a>
                             </li>
                         </ul>
