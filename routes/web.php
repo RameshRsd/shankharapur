@@ -49,6 +49,10 @@ Route::group(['namespace'=>'backend'],function(){
             Route::group(['prefix'=>'room-check','namespace'=>'checking'],function (){
                 Route::get('','RoomController@index');
                 Route::get('add-new','RoomController@create');
+                Route::post('add-new','RoomController@store');
+                Route::get('{id}/remove','RoomController@remove');
+                Route::get('{id}/continue','RoomController@continueCheck');
+                Route::get('{id}/checkout','RoomController@checkout');
             });
         });
 

@@ -275,10 +275,10 @@
                         <a href="{{url('admin/work-flows/room-check')}}" type="button" class="btn bg-white">
                             <i class="fa fa-check-circle text-success"></i> Room Check
                         </a>
-                        <button type="button" class="btn btn-dual" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-fw fa-info-circle"></i>
-                            <span class="badge badge-danger badge-pill">1</span>
-                        </button>
+                        {{--<button type="button" class="btn btn-dual" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+                            {{--<i class="fa fa-fw fa-info-circle"></i>--}}
+                            {{--<span class="badge badge-danger badge-pill">1</span>--}}
+                        {{--</button>--}}
 
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0" aria-labelledby="page-header-notifications-dropdown">
                             <div class="bg-primary-darker rounded-top font-w600 text-white text-center p-3">

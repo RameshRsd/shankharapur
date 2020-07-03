@@ -59,7 +59,7 @@
                                                                 <i class="fa fa-pen-square mr-1"></i> Cancel Book
                                                             </a>
                                                             @endif
-                                                            <a class="dropdown-item text-success" href="">
+                                                            <a class="dropdown-item text-success" href="{{url('admin/work-flows/room-check/add-new?room_id='.$room->id)}}">
                                                                 <i class="fa fa-check-circle mr-1"></i>Make Checked in
                                                             </a>
                                                         </div>
@@ -74,7 +74,7 @@
                                                             <a class="dropdown-item" href="{{url('admin/rooms'.'/'.$room->id.'/book')}}">
                                                                 <i class="fa fa-pen-square mr-1"></i> Book
                                                             </a>
-                                                            <a class="dropdown-item" href="{{url('admin/rooms'.'/'.$room->id.'/check')}}">
+                                                            <a class="dropdown-item" href="{{url('admin/work-flows/room-check/add-new?room_id='.$room->id)}}">
                                                                 <i class="fa fa-check-circle mr-1"></i> Check
                                                             </a>
                                                         </div>

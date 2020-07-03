@@ -17,4 +17,8 @@ class RoomCheck extends Model
         return $this->belongsTo(Room::class,'room_id');
     }
 
+    public function roomBook(){
+        return $this->belongsTo(RoomBook::class,'room_book_id');
+    }
+
 }
