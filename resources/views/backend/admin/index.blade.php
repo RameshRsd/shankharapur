@@ -16,7 +16,7 @@
                         <table class="table table-bordered">
                             <tbody>
                             <tr>
-                                <th colspan="10">Today Room Status | <span class="badge badge-success">{{date('d F, Y')}}</span></th>
+                                <th colspan="10">Room Status</th>
                             </tr>
                             @foreach($floors as $floor)
                                 @if(count($floor->rooms)>0)
@@ -27,6 +27,24 @@
                                                 @if($room->room_status=='CheckedIn')
                                                 <a href="#" class="btn btn-danger btn-sm" title="CheckedIn">{{$room->room_no}}</a><br>
                                                 @elseif($room->room_status=='Booked')
+                                                    @if($checkBook = $room->PendingRoomBooks()->orderBy('id','DESC')->first())
+                                                        @php
+                                                            $roomBookId= $checkBook->id;
+                                                        @endphp
+                                                        @if($checkBook->type=='internal')
+                                                            @php
+                                                                $full_name = $checkBook->guest->first_name.' '.$checkBook->guest->last_name;
+                                                            @endphp
+                                                        @else
+                                                            @php
+                                                                $full_name = $checkBook->full_name;
+                                                            @endphp
+                                                        @endif
+                                                        @else
+                                                        @php
+                                                            $roomBookId='';
+                                                        @endphp
+                                                    @endif
                                                     <div class="input-group-prepend">
                                                         <button type="button" class="btn btn-warning btn-sm" title="Booked">{{$room->room_no}}</button>
                                                         <button type="button" class="btn btn-warning btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -34,11 +52,13 @@
                                                         </button>
                                                         <div class="dropdown-menu" x-placement="top-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(82px, -2px, 0px);">
                                                             <a class="dropdown-item text-warning" href="#">
-                                                                <i class="fa fa-check-double mr-1"></i> <span class="text-warning badge badge-light">Booked By: @if($checkBook = $room->PendingRoomBooks()->orderBy('id','DESC')->first()) @if($checkBook->type=='internal') {{$checkBook->guest->first_name}}  {{$checkBook->guest->last_name}} @else {{$checkBook->full_name}} @endif @endif</span>
+                                                                <i class="fa fa-check-double mr-1"></i> <span class="text-warning badge badge-light">Booked By: {{$full_name}}</span>
                                                             </a>
-                                                            <a class="dropdown-item text-danger" href="#">
+                                                            @if($roomBookId>0)
+                                                            <a  class="dropdown-item text-danger" href="{{url('admin/work-flows/room-book').'/'.$roomBookId.'/remove'}}" onclick="return confirm('Are you sure to remove this booking?')">
                                                                 <i class="fa fa-pen-square mr-1"></i> Cancel Book
                                                             </a>
+                                                            @endif
                                                             <a class="dropdown-item text-success" href="">
                                                                 <i class="fa fa-check-circle mr-1"></i>Make Checked in
                                                             </a>

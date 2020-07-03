@@ -16,6 +16,7 @@ class CreateRoomChecksTable extends Migration
         if(!Schema::hasTable('room_checks')) {
             Schema::create('room_checks', function (Blueprint $table) {
                 $table->id();
+                $table->bigInteger('room_book_id')->nullable();
                 $table->bigInteger('user_id')->nullable();
                 $table->bigInteger('guest_id')->nullable();
                 $table->bigInteger('room_id')->nullable();

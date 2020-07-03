@@ -28,7 +28,7 @@
                                             <select name="room_type" id="room_type" class="form-control">
                                                 <option value="">--Choose--</option>
                                                 @foreach($roomTypes as $roomType)
-                                                    <option value="{{$roomType->id}}">{{$roomType->name}}</option>
+                                                    <option value="{{$roomType->id}}" @if($room->accommodation->id==$roomType->id) selected @endif>{{$roomType->name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -40,9 +40,26 @@
                                             </div>
                                             <select name="room_section" id="room_section" class="form-control">
                                                 <option value="">--Choose--</option>
+                                                @foreach($rooms as $roomValue)
+                                                    @if($roomValue->room_status=='CheckedOut' || $roomValue->id==$room->id)
+                                                    <option value="{{$roomValue->id}}" @if($roomBook->room_id==$roomValue->id) selected @endif>{{$roomValue->room_no}}</option>
+                                                    @endif
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
+                                    {{--<div class="col-sm-4 form-group">--}}
+                                        {{--<div class="input-group">--}}
+                                            {{--<div class="input-group-prepend">--}}
+                                                {{--<span class="input-group-text" id="inputGroup-sizing-default">Room Status <span class="text-danger">*</span></span>--}}
+                                            {{--</div>--}}
+                                            {{--<select name="status" id="status" class="form-control">--}}
+                                                {{--<option value="">--Choose--</option>--}}
+                                                {{--<option value="pending" @if($roomBook->status=='pending') selected @endif>Pending</option>--}}
+                                                {{--<option value="approved" @if($roomBook->status=='approved') selected @endif>Approved</option>--}}
+                                            {{--</select>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
                                     <div class="col-sm-4 form-group">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
@@ -50,19 +67,19 @@
                                             </div>
                                             <select name="type" id="type" class="form-control">
                                                 <option value="">--Choose--</option>
-                                                <option value="internal" @if(old('type')=='internal') selected @endif>Already Exist</option>
-                                                <option value="external" @if(old('type')=='external') selected @endif>New</option>
+                                                <option value="internal" @if($roomBook->type=='internal') selected @endif>Already Exist</option>
+                                                <option value="external" @if($roomBook->type=='external') selected @endif>New</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-8 form-group" id="guest_area" @if(old('type')=='external') @else style="display: none;" @endif>
+                                    <div class="col-sm-8 form-group" id="guest_area" @if($roomBook->type=='external') @else style="display: none;" @endif>
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text" id="inputGroup-sizing-default">Booking By <span class="text-danger">*</span></span>
                                                     </div>
-                                                    <input title="text" name="full_name" class="form-control" value="{{old('full_name')}}" placeholder="Full Name">
+                                                    <input title="text" name="full_name" class="form-control" value="{{$roomBook->full_name}}" placeholder="Full Name">
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
@@ -70,12 +87,12 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text" id="inputGroup-sizing-default">Mobile No. <span class="text-danger">*</span></span>
                                                     </div>
-                                                    <input title="text" name="mobile" class="form-control" value="{{old('mobile')}}" placeholder="Mobile Number">
+                                                    <input title="text" name="mobile" class="form-control" value="{{$roomBook->mobile}}" placeholder="Mobile Number">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-8 form-group" id="exist_guest_area" @if(old('type')=='internal') @else style="display: none;" @endif>
+                                    <div class="col-sm-8 form-group" id="exist_guest_area" @if($roomBook->type=='internal') @else style="display: none;" @endif>
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="input-group">
@@ -85,7 +102,7 @@
                                                     <select name="guest_id" id="guest_id" class="form-control">
                                                         <option value="">--Choose--</option>
                                                         @foreach($guests as $guest)
-                                                            <option value="{{$guest->id}}" @if(old('guest_id')==$guest->id) selected @endif>{{$guest->first_name}} {{$guest->middle_name}} {{$guest->last_name}} (ID: {{$guest->id_no}} | Mob: {{$guest->mobile1}}) </option>
+                                                            <option value="{{$guest->id}}" @if($roomBook->guest_id==$guest->id) selected @endif>{{$guest->first_name}} {{$guest->middle_name}} {{$guest->last_name}} (ID: {{$guest->id_no}} | Mob: {{$guest->mobile1}}) </option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -99,7 +116,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroup-sizing-default">Arrival Date <span class="text-danger">*</span></span>
                                     </div>
-                                    <input type="text" name="check_in_date" value="{{old('check_in_date')}}" class="js-flatpickr form-control" required>
+                                    <input type="text" name="check_in_date" value="{{$roomBook->check_in_date}}" class="js-flatpickr form-control" required>
                                 </div>
                             </div>
                             <div class="col-sm-4 form-group">
@@ -107,7 +124,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroup-sizing-default">Departure Date</span>
                                     </div>
-                                    <input type="text" name="check_out_date" value="{{old('check_out_date')}}" class="js-flatpickr form-control">
+                                    <input type="text" name="check_out_date" value="{{$roomBook->check_out_date}}" class="js-flatpickr form-control">
                                 </div>
                             </div>
                             <div class="col-sm-4 form-group">
@@ -115,7 +132,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroup-sizing-default">No of Rooms <span class="text-danger">*</span></span>
                                     </div>
-                                    <input type="number" name="number_of_room" value="{{old('number_of_room')}}" class="form-control">
+                                    <input type="number" name="number_of_room" value="{{$roomBook->number_of_room}}" class="form-control">
                                 </div>
                             </div>
                             <div class="col-sm-4 form-group">
@@ -123,9 +140,9 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroup-sizing-default">No of Child <span class="text-danger">*</span></span>
                                     </div>
-                                    @if(old('child_numbers'))
+                                    @if($roomBook->child_numbers)
                                         @php
-                                            $chilNo = old('child_numbers');
+                                            $chilNo = $roomBook->child_numbers;
                                         @endphp
                                     @else
                                         @php
@@ -140,9 +157,9 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroup-sizing-default">No of Adult <span class="text-danger">*</span></span>
                                     </div>
-                                    @if(old('child_numbers'))
+                                    @if($roomBook->adult_numbers)
                                         @php
-                                            $adult = old('adult_numbers');
+                                            $adult = $roomBook->adult_numbers;
                                         @endphp
                                     @else
                                         @php
@@ -157,12 +174,12 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroup-sizing-default">Total</span>
                                     </div>
-                                    <input type="number" id="totalNo" name="total_number" value="{{old('total_number')}}" class="form-control">
+                                    <input type="number" id="totalNo" name="total_number" value="{{$chilNo+$adult}}" class="form-control">
                                 </div>
                             </div>
 
                             <div class="col-sm-12 text-center">
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Book Now</button>
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Update Now</button>
                             </div>
                         </div>
                     </form>

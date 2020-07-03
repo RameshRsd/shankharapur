@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace'=>'frontend'],function (){
     Route::get('','HomeController@index');
+    Route::get('getRoom','HomeController@getRoom');
 });
 Route::group(['middleware'=>'guest'],function(){
     Route::get('login','frontend\\LoginController@getLogin')->name('login');
@@ -40,6 +41,10 @@ Route::group(['namespace'=>'backend'],function(){
             Route::group(['prefix'=>'room-book','namespace'=>'booking'],function (){
                 Route::get('','RoomController@index');
                 Route::get('add-new','RoomController@create');
+                Route::post('add-new','RoomController@store');
+                Route::get('{id}/remove','RoomController@remove');
+                Route::get('{id}/edit','RoomController@edit');
+                Route::post('{id}/edit','RoomController@update');
             });
             Route::group(['prefix'=>'room-check','namespace'=>'checking'],function (){
                 Route::get('','RoomController@index');
