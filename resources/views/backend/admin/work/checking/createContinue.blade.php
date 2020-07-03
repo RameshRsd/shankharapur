@@ -27,19 +27,9 @@
                                             </div>
                                             <select name="room_type" id="room_type" class="form-control">
                                                 <option value="">--Choose--</option>
-                                                @if(request('room_id'))
-                                                    @php
-                                                        $roomValue = \App\Model\Room::find(request('room_id'));
-                                                    @endphp
-                                                    @foreach($roomTypes as $roomType)
-                                                        <option value="{{$roomType->id}}" @if($roomType->id==$roomValue->accommodation_id) selected @endif>{{$roomType->name}}</option>
-                                                    @endforeach
-                                                @else
-                                                    @foreach($roomTypes as $roomType)
-                                                        <option value="{{$roomType->id}}">{{$roomType->name}}</option>
-                                                    @endforeach
-                                                @endif
-
+                                                @foreach($roomTypes as $roomType)
+                                                    <option value="{{$roomType->id}}" @if($roomCheck->room->accommodation_id==$roomType->id) selected @endif>{{$roomType->name}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -50,15 +40,12 @@
                                             </div>
                                             <select name="room_id" id="room_id" class="form-control">
                                                 <option value="">--Choose--</option>
-
-                                            @if(request('room_id'))
-                                                    @php
-                                                        $roomValue = \App\Model\Room::find(request('room_id'));
-                                                    @endphp
-                                                    @foreach($roomValue->accommodation->rooms()->where('room_status','!=','Booked')->get() as $requestRoom)
-                                                        <option value="{{$requestRoom->id}}" @if($requestRoom->id == $roomValue->id) selected @endif>{{$requestRoom->room_no}}</option>
-                                                    @endforeach
-                                                @endif
+                                                @php
+                                                    $roomValue = \App\Model\Room::find($roomCheck->room_id);
+                                                @endphp
+                                                @foreach($roomValue->accommodation->rooms()->where('room_status','CheckedOut')->get() as $requestRoom)
+                                                    <option value="{{$requestRoom->id}}" @if($requestRoom->id == $roomValue->id) selected @endif>{{$requestRoom->room_no}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -70,7 +57,7 @@
                                             <select name="guest_id" id="guest_id" class="js-select2 form-control">
                                                 <option value="">--Choose--</option>
                                                 @foreach($guests as $guest)
-                                                    <option value="{{$guest->id}}" @if(old('guest_id')==$guest->id) selected @endif>{{$guest->first_name}} {{$guest->middle_name}} {{$guest->last_name}} (ID: {{$guest->id_no}} | Mob: {{$guest->mobile1}}) </option>
+                                                    <option value="{{$guest->id}}" @if($roomCheck->guest_id==$guest->id) selected @endif>{{$guest->first_name}} {{$guest->middle_name}} {{$guest->last_name}} (ID: {{$guest->id_no}} | Mob: {{$guest->mobile1}}) </option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -83,7 +70,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroup-sizing-default">Arrival Date <span class="text-danger">*</span></span>
                                     </div>
-                                    <input type="text" name="checked_in_date" value="{{old('checked_in_date')}}" class="js-flatpickr form-control" required>
+                                    <input type="text" name="checked_in_date" value="{{date('Y-m-d')}}" class="js-flatpickr form-control" required>
                                 </div>
                             </div>
                             {{--<div class="col-sm-4 form-group">--}}
@@ -99,7 +86,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="inputGroup-sizing-default">Total Person <span class="text-danger">*</span></span>
                                     </div>
-                                    <input type="number" id="numbers" name="numbers" value="{{old('numbers')}}" class="form-control">
+                                    <input type="number" id="numbers" name="numbers" value="{{$roomCheck->numbers}}" class="form-control">
                                 </div>
                             </div>
                             <div class="col-sm-4 form-group">

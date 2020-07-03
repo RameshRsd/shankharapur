@@ -52,6 +52,7 @@ Route::group(['namespace'=>'backend'],function(){
                 Route::post('add-new','RoomController@store');
                 Route::get('{id}/remove','RoomController@remove');
                 Route::get('{id}/continue','RoomController@continueCheck');
+                Route::post('{id}/continue','RoomController@continueCheckStore');
                 Route::get('{id}/checkout','RoomController@checkout');
             });
         });

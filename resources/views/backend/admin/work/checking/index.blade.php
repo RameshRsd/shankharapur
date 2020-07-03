@@ -44,23 +44,28 @@
                                         <span class="badge badge-light">{{date('d M, Y',strtotime($room->checked_in_date))}}</span>
                                     </td>
                                     <td>
-                                        <span class="badge badge-light">{{date('d M, Y',strtotime($room->checked_out_date))}}</span>
+                                        @if(isset($room->checked_out_date))
+                                            <span class="badge badge-light">{{date('d M, Y',strtotime($room->checked_out_date))}}</span>
+                                        @endif
                                     </td>
                                     <td class="text-center">
                                         <span class="badge badge-success">Total:{{$room->numbers}}</span>
                                     </td>
                                     <td>
-                                        @if(isset($room->checked_out_date) && $room->room->room_status=='CheckedOut')
+                                        @php
+                                            $latestGuest = \App\Model\RoomCheck::where('room_id',$room->room_id)->orderBy('id','DESC')->first();
+                                        @endphp
+                                        @if(isset($room->checked_out_date) && $room->room->room_status=='CheckedOut' &&  $latestGuest->guest_id==$room->guest_id)
                                             <span class="badge badge-success">Checked Out</span>
-                                        @elseif($room->checked_in_date==date('Y-m-d'))
+                                        @elseif(!(isset($room->checked_out_date)) && $room->checked_in_date==date('Y-m-d') &&  $latestGuest->guest_id==$room->guest_id)
                                         <span class="badge badge-success">Checked in</span>
                                         <a class="badge badge-danger" href="{{url()->current().'/'.$room->id.'/checkout'}}" onclick="return confirm('Are you sure to checked out this room?')">Make Checked Out</a>
-                                        @elseif($room->checked_in_date>date('Y-m-d'))
+                                        @elseif($room->checked_in_date>date('Y-m-d') &&  $latestGuest->guest_id==$room->guest_id)
                                             <span class="badge badge-dark">Will be stay from : {{date('d M, Y',strtotime($room->checked_in_date))}}</span>
                                             <a href="{{url()->current().'/'.$room->id.'/remove'}}"  onclick="return confirm('Are you sure to cancel this checked in room?')" class="badge badge-danger" title="Cancel Book">Cancel Booking</a>
                                         @else
                                             <a class="badge badge-info" href="{{url()->current().'/'.$room->id.'/continue'}}">Make continue checked in</a>
-                                            <a class="badge badge-danger" href="{{url()->current().'/'.$room->id.'/checkout'}}" onclick="return confirm('Are you sure to checked out this room?')">Make Checked Out</a>
+                                            {{--<a class="badge badge-danger" href="{{url()->current().'/'.$room->id.'/checkout'}}" onclick="return confirm('Are you sure to checked out this room?')">Make Checked Out</a>--}}
                                         @endif
                                     </td>
                                     <td class="text-center">

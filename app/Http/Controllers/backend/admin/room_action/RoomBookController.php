@@ -49,7 +49,9 @@ class RoomBookController extends Controller
             $roomBook->type = $request->type;
             $roomBook->room_id = $id;
             $roomBook->check_in_date = date('Y-m-d',strtotime($request->check_in_date));
-            $roomBook->check_out_date = date('Y-m-d',strtotime($request->check_out_date));
+            if ($request->check_out_date){
+                $roomBook->check_out_date = date('Y-m-d',strtotime($request->check_out_date));
+            }
             $roomBook->child_numbers = $request->child_numbers;
             $roomBook->adult_numbers = $request->adult_numbers;
             $roomBook->number_of_room = $request->number_of_room;

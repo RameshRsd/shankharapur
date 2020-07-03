@@ -25,7 +25,22 @@
                                         @foreach($floor->rooms as $room)
                                             <td>
                                                 @if($room->room_status=='CheckedIn')
-                                                <a href="#" class="btn btn-danger btn-sm" title="CheckedIn">{{$room->room_no}}</a><br>
+                                                    @if($checkRoom = $room->roomChecked()->orderBy('id','DESC')->first())
+                                                        @php
+                                                            $roomCheckId= $checkRoom->id;
+                                                        @endphp
+                                                    @endif
+                                                    <div class="input-group-prepend">
+                                                        <button type="button" class="btn btn-danger btn-sm" title="Checked In">{{$room->room_no}}</button>
+                                                        <button type="button" class="btn btn-danger btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <span class="sr-only">Toggle Dropdown</span>
+                                                        </button>
+                                                        <div class="dropdown-menu" x-placement="top-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(82px, -2px, 0px);">
+                                                            <a class="dropdown-item" href="{{url('admin/work-flows/room-check').'/'.$roomCheckId.'/checkout'}}"  onclick="return confirm('Are you sure to checked out this room?')">
+                                                                <i class="fa fa-pen-square mr-1"></i> Check Out
+                                                            </a>
+                                                        </div>
+                                                    </div>
                                                 @elseif($room->room_status=='Booked')
                                                     @if($checkBook = $room->PendingRoomBooks()->orderBy('id','DESC')->first())
                                                         @php
@@ -136,7 +151,7 @@
                                     </div>
                                     <div class="ml-3 text-right">
                                         <p class="text-white font-size-h3 font-w300 mb-0">
-                                            +5
+                                            +{{$availableRoom}}
                                         </p>
                                         <p class="text-white-75 mb-0">
                                             Room Available
@@ -175,23 +190,6 @@
                                         <p class="text-white-75 mb-0">
                                             Today Sales
                                         </p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-md-4">
-                            <a class="block block-rounded block-link-shadow bg-warning" href="#">
-                                <div class="block-content block-content-full d-flex align-items-center justify-content-between">
-                                    <div class="mr-3">
-                                        <p class="text-white font-size-h3 font-w300 mb-0">
-                                            + NRs.100/-
-                                        </p>
-                                        <p class="text-white-75 mb-0">
-                                            Today Expenses
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <i class="fa fa-info-circle text-dark"></i>
                                     </div>
                                 </div>
                             </a>
