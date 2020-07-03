@@ -69,6 +69,47 @@
                             <span class="nav-main-link-name">Dashboard</span>
                         </a>
                     </li>
+                    <li class="nav-main-heading">Work Flow</li>
+                    <li class="nav-main-item  @if(request()->segment('3')=='room-book') open @endif">
+                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="{{url('admin/profile-manage')}}">
+                            <i class="nav-main-link-icon fa fa-refresh"></i>
+                            <span class="nav-main-link-name">Room Book</span>
+                        </a>
+                        <ul class="nav-main-submenu">
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('4')=='') active @endif" href="{{url('admin/work-flows/room-book')}}">
+                                    <i class="nav-main-link-icon fa fa-list"></i>
+                                    <span class="nav-main-link-name">Booking List</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('4')=='add-new') active @endif" href="{{url('admin/work-flows/room-book/add-new')}}">
+                                    <i class="nav-main-link-icon fa fa-plus-circle"></i>
+                                    <span class="nav-main-link-name">New Booking</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-main-item  @if(request()->segment('3')=='room-check') open @endif">
+                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="{{url('admin/profile-manage')}}">
+                            <i class="nav-main-link-icon fa fa-check-circle"></i>
+                            <span class="nav-main-link-name">Room Check</span>
+                        </a>
+                        <ul class="nav-main-submenu">
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('4')=='') active @endif" href="{{url('admin/work-flows/room-check')}}">
+                                    <i class="nav-main-link-icon fa fa-list"></i>
+                                    <span class="nav-main-link-name">Checkedin List</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('4')=='add-new') active @endif" href="{{url('admin/work-flows/room-check/add-new')}}">
+                                    <i class="nav-main-link-icon fa fa-plus-circle"></i>
+                                    <span class="nav-main-link-name">New Checkedin</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="nav-main-heading">Profile Manage</li>
                     <li class="nav-main-item  @if(request()->segment('2')=='profile-manage') open @endif">
                         <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="{{url('admin/profile-manage')}}">
@@ -90,11 +131,10 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-main-heading">Guest Manage</li>
                     <li class="nav-main-item  @if(request()->segment('2')=='guest-manage') open @endif">
                         <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="{{url('admin/profile-manage')}}">
                             <i class="nav-main-link-icon fa fa-user"></i>
-                            <span class="nav-main-link-name">Guest Manage</span>
+                            <span class="nav-main-link-name">Guest Manager</span>
                         </a>
                         <ul class="nav-main-submenu">
                             <li class="nav-main-item">
@@ -111,7 +151,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-main-heading">Room Manage</li>
+                    <li class="nav-main-heading">Settings</li>
                     <li class="nav-main-item  @if(request()->segment('2')=='accommodations') open @endif">
                         <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="{{url('admin/accommodations')}}">
                             <i class="nav-main-link-icon fa fa-arrow-alt-circle-right"></i>
@@ -164,11 +204,10 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-main-heading">Location Manage</li>
                     <li class="nav-main-item  @if(request()->segment('2')=='location-manage') open @endif">
                         <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="{{url('admin/profile-manage')}}">
                             <i class="nav-main-link-icon fa fa-map"></i>
-                            <span class="nav-main-link-name">Locations</span>
+                            <span class="nav-main-link-name">Location Manager</span>
                         </a>
                         <ul class="nav-main-submenu">
                             <li class="nav-main-item">
@@ -230,10 +269,17 @@
 
                     <!-- Notifications Dropdown -->
                     <div class="dropdown d-inline-block">
+                        <a href="{{url('admin/work-flows/room-book')}}" type="button" class="btn bg-white">
+                            <i class="fa fa-refresh text-warning"></i> Room Book
+                        </a>
+                        <a href="{{url('admin/work-flows/room-check')}}" type="button" class="btn bg-white">
+                            <i class="fa fa-check-circle text-success"></i> Room Check
+                        </a>
                         <button type="button" class="btn btn-dual" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-fw fa-info-circle"></i>
                             <span class="badge badge-danger badge-pill">1</span>
                         </button>
+
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0" aria-labelledby="page-header-notifications-dropdown">
                             <div class="bg-primary-darker rounded-top font-w600 text-white text-center p-3">
                                 Notifications

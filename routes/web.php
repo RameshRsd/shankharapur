@@ -35,6 +35,18 @@ Route::group(['namespace'=>'backend'],function(){
             Route::post('changePassword','ProfileController@changePassword');
             Route::post('updatePhoto','ProfileController@updatePhoto');
         });
+        Route::group(['prefix'=>'work-flows','namespace'=>'work'],function (){
+            Route::get('','WorkController@index');
+            Route::group(['prefix'=>'room-book','namespace'=>'booking'],function (){
+                Route::get('','RoomController@index');
+                Route::get('add-new','RoomController@create');
+            });
+            Route::group(['prefix'=>'room-check','namespace'=>'checking'],function (){
+                Route::get('','RoomController@index');
+                Route::get('add-new','RoomController@create');
+            });
+        });
+
         Route::group(['prefix'=>'guest-manage','namespace'=>'guest'],function (){
             Route::get('','GuestController@index');
             Route::get('guests','GuestController@guestList');
