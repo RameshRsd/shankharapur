@@ -1,6 +1,13 @@
 @extends('backend.front')
 @section('body')
-
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
     <div id="page-container" class="page-header-fixed  page-header-dark main-content-boxed">
 
 
@@ -16,10 +23,11 @@
                             <div class="block-content block-content-full px-lg-5 px-xl-6 py-4 py-md-5 py-lg-6 bg-white">
                                 <!-- Header -->
                                 <div class="mb-2 text-center">
-                                    <a class="link-fx font-w700 font-size-h1" href="{{url('')}}">
-                                        <span class="text-dark">Hotel</span><span class="text-primary">Shankharapur</span><i></i>
+                                    <a class="font-w700 font-size-h1" href="{{url('')}}">
+                                        <img src="{{asset('property/logo.png')}}" class="img-fluid" alt="" style="width: 40%;">
+                                        {{--<span class="text-dark">Hotel</span><span class="text-primary">Shankharapur</span><i></i>--}}
                                     </a>
-                                    <p class="text-uppercase font-w700 font-size-sm text-muted">Sign In</p>
+                                    <p class="text-uppercase font-w700 font-size-sm text-muted mt-3">Sign In</p>
                                     @if($errors->any())
                                         <hr>
                                         <div role="alert" style="background-color:#d4edda; color:#155724; border-radius: 5px; text-align: left;" class="alert  alert-dismissible show">
@@ -42,23 +50,17 @@
                                 <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
                                 <form class="js-validation-signin" action="" method="POST">{{csrf_field()}}
                                     <div class="form-group">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" id="login-username" name="email" placeholder="Username">
-                                            <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-user-circle"></i>
-                                            </span>
-                                            </div>
+                                        <div class="md-form">
+                                            <i class="fas fa-user prefix"></i>
+                                            <input type="text" id="inputIconEx2" name="email" class="form-control">
+                                            <label for="inputIconEx2">E-mail address</label>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="input-group">
-                                            <input type="password" class="form-control" id="login-password" name="password" placeholder="Password">
-                                            <div class="input-group-append">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-asterisk"></i>
-                                            </span>
-                                            </div>
+                                        <div class="md-form">
+                                            <i class="fas fa-lock prefix"></i>
+                                            <input type="password" id="inputIconEx1" name="password" class="form-control">
+                                            <label for="inputIconEx1">Password</label>
                                         </div>
                                     </div>
                                     <div class="form-group d-sm-flex justify-content-sm-between align-items-sm-center text-center text-sm-left">
@@ -96,5 +98,12 @@
     </div>
 
 
-
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
 @endsection

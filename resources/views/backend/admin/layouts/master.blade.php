@@ -69,6 +69,47 @@
                             <span class="nav-main-link-name">Dashboard</span>
                         </a>
                     </li>
+                    <li class="nav-main-heading">Work Flow</li>
+                    <li class="nav-main-item  @if(request()->segment('3')=='room-book') open @endif">
+                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="{{url('admin/profile-manage')}}">
+                            <i class="nav-main-link-icon fa fa-refresh"></i>
+                            <span class="nav-main-link-name">Room Book</span>
+                        </a>
+                        <ul class="nav-main-submenu">
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('4')=='') active @endif" href="{{url('admin/work-flows/room-book')}}">
+                                    <i class="nav-main-link-icon fa fa-list"></i>
+                                    <span class="nav-main-link-name">Booking List</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('4')=='add-new') active @endif" href="{{url('admin/work-flows/room-book/add-new')}}">
+                                    <i class="nav-main-link-icon fa fa-plus-circle"></i>
+                                    <span class="nav-main-link-name">New Booking</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-main-item  @if(request()->segment('3')=='room-check') open @endif">
+                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="{{url('admin/profile-manage')}}">
+                            <i class="nav-main-link-icon fa fa-check-circle"></i>
+                            <span class="nav-main-link-name">Room Check</span>
+                        </a>
+                        <ul class="nav-main-submenu">
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('4')=='') active @endif" href="{{url('admin/work-flows/room-check')}}">
+                                    <i class="nav-main-link-icon fa fa-list"></i>
+                                    <span class="nav-main-link-name">Checkedin List</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('4')=='add-new') active @endif" href="{{url('admin/work-flows/room-check/add-new')}}">
+                                    <i class="nav-main-link-icon fa fa-plus-circle"></i>
+                                    <span class="nav-main-link-name">New Checkedin</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="nav-main-heading">Profile Manage</li>
                     <li class="nav-main-item  @if(request()->segment('2')=='profile-manage') open @endif">
                         <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="{{url('admin/profile-manage')}}">
@@ -90,31 +131,83 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-main-heading">Guest Manage</li>
-                    <li class="nav-main-item @if(request()->segment('2')=='guests') open @endif">
-                        <a class="nav-main-link @if(request()->segment('2')=='guests') active @endif" href="{{url('admin/guests')}}">
+                    <li class="nav-main-item  @if(request()->segment('2')=='guest-manage') open @endif">
+                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="{{url('admin/profile-manage')}}">
                             <i class="nav-main-link-icon fa fa-user"></i>
-                            <span class="nav-main-link-name">Guests</span>
+                            <span class="nav-main-link-name">Guest Manager</span>
                         </a>
+                        <ul class="nav-main-submenu">
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('3')=='guests') active @endif" href="{{url('admin/guest-manage/guests')}}">
+                                    <i class="nav-main-link-icon fa fa-list-alt"></i>
+                                    <span class="nav-main-link-name">Guest List</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('3')=='add-guest') active @endif" href="{{url('admin/guest-manage/add-guest')}}">
+                                    <i class="nav-main-link-icon fa fa-plus-circle"></i>
+                                    <span class="nav-main-link-name">New Guest</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                    <li class="nav-main-heading">Room Manage</li>
-                    <li class="nav-main-item @if(request()->segment('2')=='accommodations') open @endif">
-                        <a class="nav-main-link @if(request()->segment('3')=='accommodations') active @endif" href="{{url('admin/room-manage/accommodations')}}">
+                    <li class="nav-main-heading">Settings</li>
+                    <li class="nav-main-item  @if(request()->segment('2')=='accommodations') open @endif">
+                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="{{url('admin/accommodations')}}">
                             <i class="nav-main-link-icon fa fa-arrow-alt-circle-right"></i>
-                            <span class="nav-main-link-name">Accommodations</span>
+                            <span class="nav-main-link-name">Accommodation</span>
                         </a>
+                        <ul class="nav-main-submenu">
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('3')=='accommodation-list') active @endif" href="{{url('admin/accommodations/accommodation-list')}}">
+                                    <i class="nav-main-link-icon fa fa-list-alt"></i>
+                                    <span class="nav-main-link-name">List</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('3')=='add-accommodation') active @endif" href="{{url('admin/accommodations/add-accommodation')}}">
+                                    <i class="nav-main-link-icon fa fa-plus-circle"></i>
+                                    <span class="nav-main-link-name">Add New</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                    <li class="nav-main-item @if(request()->segment('2')=='rooms') open @endif">
-                        <a class="nav-main-link @if(request()->segment('3')=='rooms') active @endif" href="{{url('admin/room-manage/rooms')}}">
+                    <li class="nav-main-item  @if(request()->segment('2')=='room-manage') open @endif">
+                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="{{url('admin/room-manage')}}">
                             <i class="nav-main-link-icon fa fa-arrow-alt-circle-right"></i>
-                            <span class="nav-main-link-name">Room List</span>
+                            <span class="nav-main-link-name">Room Manage</span>
                         </a>
+                        <ul class="nav-main-submenu">
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('3')=='room-list') active @endif" href="{{url('admin/room-manage/room-list')}}">
+                                    <i class="nav-main-link-icon fa fa-list-alt"></i>
+                                    <span class="nav-main-link-name">Room List</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('3')=='add-room') active @endif" href="{{url('admin/room-manage/add-room')}}">
+                                    <i class="nav-main-link-icon fa fa-plus-circle"></i>
+                                    <span class="nav-main-link-name">Add New Room</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('3')=='room-features') active @endif" href="{{url('admin/room-manage/room-features')}}">
+                                    <i class="nav-main-link-icon fa fa-plus-circle"></i>
+                                    <span class="nav-main-link-name">Add Room Features</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('3')=='floors') active @endif" href="{{url('admin/room-manage/floors')}}">
+                                    <i class="nav-main-link-icon fa fa-plus-circle"></i>
+                                    <span class="nav-main-link-name">Floor Manage</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                    <li class="nav-main-heading">Location Manage</li>
                     <li class="nav-main-item  @if(request()->segment('2')=='location-manage') open @endif">
                         <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="{{url('admin/profile-manage')}}">
                             <i class="nav-main-link-icon fa fa-map"></i>
-                            <span class="nav-main-link-name">Locations</span>
+                            <span class="nav-main-link-name">Location Manager</span>
                         </a>
                         <ul class="nav-main-submenu">
                             <li class="nav-main-item">
@@ -176,10 +269,17 @@
 
                     <!-- Notifications Dropdown -->
                     <div class="dropdown d-inline-block">
-                        <button type="button" class="btn btn-dual" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-fw fa-info-circle"></i>
-                            <span class="badge badge-danger badge-pill">1</span>
-                        </button>
+                        <a href="{{url('admin/work-flows/room-book')}}" type="button" class="btn bg-white">
+                            <i class="fa fa-refresh text-warning"></i> Room Book
+                        </a>
+                        <a href="{{url('admin/work-flows/room-check')}}" type="button" class="btn bg-white">
+                            <i class="fa fa-check-circle text-success"></i> Room Check
+                        </a>
+                        {{--<button type="button" class="btn btn-dual" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+                            {{--<i class="fa fa-fw fa-info-circle"></i>--}}
+                            {{--<span class="badge badge-danger badge-pill">1</span>--}}
+                        {{--</button>--}}
+
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0" aria-labelledby="page-header-notifications-dropdown">
                             <div class="bg-primary-darker rounded-top font-w600 text-white text-center p-3">
                                 Notifications
@@ -287,143 +387,130 @@
         </main>
         <!-- END Main Container -->
 
-        <!-- Footer -->
-        <footer id="page-footer" class="bg-body">
-            <div class="content py-0">
-                <div class="row font-size-sm">
-                    <div class="col-sm-6 order-sm-2 mb-1 mb-sm-0 text-center text-sm-right">
-                        Developed <i class="fa fa-heart text-danger"></i> by <a class="font-w600" href="https://www.facebook.com/gsn.np" target="_blank">Genius Service Nepal Pvt. Ltd.</a>
+        <!-- changePassword Modal -->
+        <div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="modal-default-popout" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-popout" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                        <h5 class="modal-title text-white">Change Password</h5>
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    <div class="col-sm-6 order-sm-1 text-center text-sm-left">
-                        <a class="font-w600" href="{{url('')}}">Admin</a> &copy; <span>{{date('Y')}}</span>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- END Footer -->
-    </div>
-    <!-- changePassword Modal -->
-    <div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="modal-default-popout" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-popout" role="document">
-            <div class="modal-content">
-                <div class="modal-header bg-primary">
-                    <h5 class="modal-title text-white">Change Password</h5>
-                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body pb-1">
+                    <div class="modal-body pb-1">
 
-                    <div class="block block-transparent block-rounded w-100 mb-0 overflow-hidden">
-                        <div class="block-content block-content-full bg-white">
-                            <!-- Header -->
-                            <div class="text-center">
-                                <p class="text-uppercase font-w700 font-size-sm text-muted">Change Password</p>
-                            </div>
-                            <!-- END Header -->
+                        <div class="block block-transparent block-rounded w-100 mb-0 overflow-hidden">
+                            <div class="block-content block-content-full bg-white">
+                                <!-- Header -->
+                                <div class="text-center">
+                                    <p class="text-uppercase font-w700 font-size-sm text-muted">Change Password</p>
+                                </div>
+                                <!-- END Header -->
 
-                            <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
-                            <form class="js-validation-signin" action="{{url('admin/profile-manage/changePassword')}}" method="POST">{{csrf_field()}}
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
+                                <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
+                                <form class="js-validation-signin" action="{{url('admin/profile-manage/changePassword')}}" method="POST">{{csrf_field()}}
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
                                                     <span class="input-group-text">
                                                         New Password <span class="text-danger">*</span>
                                                     </span>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="example-group1-input1" name="password" required>
                                                 </div>
-                                                <input type="text" class="form-control" id="example-group1-input1" name="password" required>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
                                                     <span class="input-group-text">
                                                         Re-Type New Password <span class="text-danger">*</span>
                                                     </span>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="example-group1-input1" name="password_confirmation" required>
                                                 </div>
-                                                <input type="text" class="form-control" id="example-group1-input1" name="password_confirmation" required>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group text-center mb-0">
-                                    <button type="submit" class="btn btn-hero-primary">
-                                        <i class="fa fa-fw fa-save mr-1"></i> Change Now
-                                    </button>
-                                </div>
-                            </form>
+                                    <div class="form-group text-center mb-0">
+                                        <button type="submit" class="btn btn-hero-primary">
+                                            <i class="fa fa-fw fa-save mr-1"></i> Change Now
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- changePassword Modal -->
+        <!-- changePassword Modal -->
 
-    <!-- Update Photo Modal -->
-    <div class="modal fade" id="updatePhoto" tabindex="-1" role="dialog" aria-labelledby="modal-default-popout" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-popout" role="document">
-            <div class="modal-content">
-                <div class="modal-header bg-primary">
-                    <h5 class="modal-title text-white">Update Photo</h5>
-                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body pb-1">
+        <!-- Update Photo Modal -->
+        <div class="modal fade" id="updatePhoto" tabindex="-1" role="dialog" aria-labelledby="modal-default-popout" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-popout" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                        <h5 class="modal-title text-white">Update Photo</h5>
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body pb-1">
 
-                    <div class="block block-transparent block-rounded w-100 mb-0 overflow-hidden">
-                        <div class="block-content block-content-full bg-white">
-                            <!-- Header -->
-                            <div class="text-center">
-                                <p class="text-uppercase font-w700 font-size-sm text-muted">Update Photo</p>
-                            </div>
-                            <!-- END Header -->
+                        <div class="block block-transparent block-rounded w-100 mb-0 overflow-hidden">
+                            <div class="block-content block-content-full bg-white">
+                                <!-- Header -->
+                                <div class="text-center">
+                                    <p class="text-uppercase font-w700 font-size-sm text-muted">Update Photo</p>
+                                </div>
+                                <!-- END Header -->
 
-                            <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
-                            <form class="js-validation-signin" action="{{url('admin/profile-manage/updatePhoto')}}" method="POST" enctype="multipart/form-data">{{csrf_field()}}
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="text-center mb-2 p2 bg-white" style="width: 40%; margin: 0 auto;">
-                                            <img class="img-avatar img-avatar-thumb bg-white" id="logoDisplay" src="{{asset('default'.'/'.\Illuminate\Support\Facades\Auth::user()->photo)}}" alt="">
+                                <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
+                                <form class="js-validation-signin" action="{{url('admin/profile-manage/updatePhoto')}}" method="POST" enctype="multipart/form-data">{{csrf_field()}}
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="text-center mb-2 p2 bg-white" style="width: 40%; margin: 0 auto;">
+                                                <img class="img-avatar img-avatar-thumb bg-white" id="logoDisplay" src="{{asset('default'.'/'.\Illuminate\Support\Facades\Auth::user()->photo)}}" alt="">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
                                                     <span class="input-group-text">
                                                         Choose File <span class="text-danger">*</span>
                                                     </span>
+                                                    </div>
+                                                    <input type="file" onchange="logoURL(this);" class="form-control" id="example-group1-input1" name="photo" required>
                                                 </div>
-                                                <input type="file" onchange="logoURL(this);" class="form-control" id="example-group1-input1" name="photo" required>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group text-center mb-0">
-                                    <button type="submit" class="btn btn-hero-primary">
-                                        <i class="fa fa-fw fa-save mr-1"></i> Update Now
-                                    </button>
-                                </div>
-                            </form>
+                                    <div class="form-group text-center mb-0">
+                                        <button type="submit" class="btn btn-hero-primary">
+                                            <i class="fa fa-fw fa-save mr-1"></i> Update Now
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
+        <!-- Update Photo Modal -->
+
     </div>
-    <!-- Update Photo Modal -->
 
 @endsection
 @section('script')

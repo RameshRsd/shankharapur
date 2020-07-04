@@ -20,6 +20,8 @@ Route::group(['namespace'=>'frontend'],function (){
     Route::get('about-us','HomeController@about_us');
     Route::get('news','HomeController@news');
     Route::get('contact-us','HomeController@contact_us');
+
+    Route::get('getRoom','HomeController@getRoom');
 });
 Route::group(['middleware'=>'guest'],function(){
     Route::get('login','frontend\\LoginController@getLogin')->name('login');
@@ -40,7 +42,61 @@ Route::group(['namespace'=>'backend'],function(){
             Route::post('changePassword','ProfileController@changePassword');
             Route::post('updatePhoto','ProfileController@updatePhoto');
         });
-        Route::get('guests','GuestController@index');
+        Route::group(['prefix'=>'work-flows','namespace'=>'work'],function (){
+            Route::get('','WorkController@index');
+            Route::group(['prefix'=>'room-book','namespace'=>'booking'],function (){
+                Route::get('','RoomController@index');
+                Route::get('add-new','RoomController@create');
+                Route::post('add-new','RoomController@store');
+                Route::get('{id}/remove','RoomController@remove');
+                Route::get('{id}/edit','RoomController@edit');
+                Route::post('{id}/edit','RoomController@update');
+            });
+            Route::group(['prefix'=>'room-check','namespace'=>'checking'],function (){
+                Route::get('','RoomController@index');
+                Route::get('add-new','RoomController@create');
+                Route::post('add-new','RoomController@store');
+                Route::get('{id}/remove','RoomController@remove');
+                Route::get('{id}/continue','RoomController@continueCheck');
+                Route::post('{id}/continue','RoomController@continueCheckStore');
+                Route::get('{id}/checkout','RoomController@checkout');
+            });
+        });
+
+        Route::group(['prefix'=>'guest-manage','namespace'=>'guest'],function (){
+            Route::get('','GuestController@index');
+            Route::get('guests','GuestController@guestList');
+            Route::get('add-guest','GuestController@create');
+            Route::post('add-guest','GuestController@store');
+            Route::get('guests/{id}/edit','GuestController@edit');
+            Route::post('guests/{id}/edit','GuestController@update');
+        });
+
+        Route::group(['prefix'=>'accommodations','namespace'=>'accommodation'],function (){
+            Route::get('','AccommodationController@index');
+            Route::get('accommodation-list','AccommodationController@getList');
+            Route::get('add-accommodation','AccommodationController@create');
+            Route::post('add-accommodation','AccommodationController@store');
+            Route::get('accommodation-list/{id}/edit','AccommodationController@edit');
+            Route::post('accommodation-list/{id}/edit','AccommodationController@update');
+        });
+
+        Route::group(['prefix'=>'room-manage','namespace'=>'rooms'],function (){
+            Route::get('','RoomController@index');
+            Route::get('room-list','RoomController@getList');
+            Route::get('add-room','RoomController@create');
+            Route::post('add-room','RoomController@store');
+            Route::get('room-list/{id}/edit','RoomController@edit');
+            Route::post('room-list/{id}/edit','RoomController@update');
+
+            Route::get('room-features','RoomController@roomFeatures');
+            Route::post('room-features','RoomController@roomFeaturesStore');
+            Route::post('room-features/{id}/update','RoomController@roomFeaturesUpdate');
+
+            Route::get('floors','RoomController@floors');
+            Route::post('floors','RoomController@floorsStore');
+            Route::post('floors/{id}/update','RoomController@floorsUpdate');
+        });
 
         Route::group(['prefix'=>'location-manage','namespace'=>'location'],function (){
             Route::get('','LocationController@index');
@@ -62,6 +118,11 @@ Route::group(['namespace'=>'backend'],function(){
             Route::get('cities/{id}/edit','CityController@edit');
             Route::post('cities/{id}/edit','CityController@update');
 
+        });
+
+        Route::group(['prefix'=>'rooms','namespace'=>'room_action'],function (){
+            Route::get('{id}/book','RoomBookController@book');
+            Route::post('{id}/book','RoomBookController@bookStore');
         });
 
         Route::get('get_state','AjaxController@getState');

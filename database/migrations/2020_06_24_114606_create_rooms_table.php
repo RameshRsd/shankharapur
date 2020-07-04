@@ -24,6 +24,7 @@ class CreateRoomsTable extends Migration
                 $table->enum('rate_type',['Rupees','Dollor'])->nullable();
                 $table->longText('details')->nullable();
                 $table->string('image')->nullable();
+                $table->enum('room_status',['CheckedIn','CheckedOut','Booked'])->default('CheckedOut');
                 $table->timestamps();
             });
         }

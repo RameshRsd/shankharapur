@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Model\Room;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -30,5 +31,10 @@ class HomeController extends Controller
     public function contact_us(){
         $title = 'Contact Us';
         return view('frontend.pages.contact_us',compact('title'));
+    }
+    public function getRoom(Request $request){
+        $room_type = $request->room_type;
+        $rooms = Room::where('accommodation_id',$room_type)->where('room_status','CheckedOut')->orderBy('room_no')->get();
+        return response()->json($rooms);
     }
 }
