@@ -2,11 +2,9 @@
 @section('body')
     <!-- Home -->
     <div class="home">
-
         <!-- Home Slider -->
         <div class="home_slider_container">
             <div class="owl-carousel owl-theme home_slider">
-
                 <!-- Slide -->
                 <div class="owl-item">
                     <div class="background_image" style="background-image:url({{asset('themes')}}/images/home_slider_1.jpg)"></div>
@@ -24,7 +22,7 @@
                         </div>
                     </div>
                 </div>
-
+                <!-- Slide -->
                 <!-- Slide -->
                 <div class="owl-item">
                     <div class="background_image" style="background-image:url({{asset('themes')}}/images/home_slider_1.jpg)"></div>
@@ -42,10 +40,9 @@
                         </div>
                     </div>
                 </div>
-
+                <!-- Slide -->
                 <!-- Slide -->
                 <div class="owl-item">
-                <!-- Image credit: https://unsplash.com/@santtd -->
                     <div class="background_image" style="background-image:url({{asset('themes')}}/images/home_slider_1.jpg)"></div>
                     <div class="home_content_container">
                         <div class="container">
@@ -61,6 +58,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- Slide -->
 
             </div>
 

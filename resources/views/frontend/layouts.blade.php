@@ -72,14 +72,14 @@
                             <nav class="main_nav">
                                 <ul class="d-flex flex-row align-items-center justify-content-start">
                                     <li class="active"><a href="{{url('')}}"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>home</span></div></a></li>
-                                    <li><a href="javascript:void(0)"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>about us</span></div></a></li>
-                                    <li><a href="javascript:void(0)"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>rooms</span></div></a></li>
-                                    <li><a href="javascript:void(0)"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>news</span></div></a></li>
-                                    <li><a href="javascript:void(0)"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>contact</span></div></a></li>
+                                    <li><a href="{{url('about-us')}}"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>about us</span></div></a></li>
+                                    <li><a href="{{url('rooms')}}"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>rooms</span></div></a></li>
+                                    <li><a href="{{url('news')}}"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>news</span></div></a></li>
+                                    <li><a href="{{url('contact-us')}}"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>contact</span></div></a></li>
                                     <li><a href="{{url('login')}}"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span title="Login"><i class="fa fa-sign-in"></i></span></div></a></li>
                                 </ul>
                             </nav>
-                            <a href="#" class="button_container header_button ml-auto"><div class="button text-center"><span>Book Your Stay</span></div></a>
+                            <a href="#" class="button_container header_button"><div class="button text-center"><span>Book Your Stay</span></div></a>
                             <div class="hamburger ml-auto"><i class="fa fa-bars" aria-hidden="true"></i></div>
                             <div class="header_review"><a href="#">Add your review</a></div>
                         </div>
@@ -97,8 +97,8 @@
             <ul class="menu_nav_list text-center">
                 <li><a href="javascript:void(0)">Home</a></li>
                 <li><a href="javascript:void(0)">About us</a></li>
-                <li><a href="javascript:void(0)">Rooms</a></li>
-                <li><a href="javascript:void(0)">News</a></li>
+                <li><a href="{{url('rooms')}}">Rooms</a></li>
+                <li><a href="{{url('news')}}">News</a></li>
                 <li><a href="javascript:void(0)">Contact</a></li>
                 <li><a href="{{url('login')}}"><i class="fa fa-sign-in"></i> Login</a></li>
             </ul>
@@ -122,10 +122,6 @@
                                 <img src="{{asset('property/logo_long.png')}}" alt="" style="width: 100%;">
                             </a>
                         </div>
-                        <div class="copyright"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Hotel Shankharapur | Best Memories start here || Copyright &copy;{{date('Y')}} All rights reserved.
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        </div>
                     </div>
                 </div>
 
@@ -141,6 +137,13 @@
                         </ul>
                         <div class="footer_menu_text">
                             <p>Praesent fermentum ligula in dui imperdiet, vel tempus nulla ultricies. Phasellus at commodo ligula.</p>
+                        </div>
+                        <div class="social_link">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                            <a href="#"><i class="fa fa-tripadvisor"></i></a>
                         </div>
                     </div>
                 </div>
@@ -169,13 +172,16 @@
                         </div>
                     </div>
                 </div>
-
-            </div>
+                <div class="col-lg-12">
+                    <div class="copyright text-lg-center pt-5"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        <p>&copy;{{date('Y')}} Hotel Shankharapur. All Rights Reserved. <b>Design By:</b> <a href="#">Genius Nepal</a></p>
+                    </div>
+                </div>
+                            </div>
         </div>
     </footer>
 </div>
-
-
+@yield('script')
 <script src="{{asset('themes')}}/js/jquery-3.2.1.min.js"></script>
 <script src="{{asset('themes')}}/styles/bootstrap-4.1.2/popper.js"></script>
 <script src="{{asset('themes')}}/styles/bootstrap-4.1.2/bootstrap.min.js"></script>
@@ -189,6 +195,8 @@
 <script src="{{asset('themes')}}/plugins/easing/easing.js"></script>
 <script src="{{asset('themes')}}/plugins/parallax-js-master/parallax.min.js"></script>
 <script src="{{asset('themes')}}/js/custom.js"></script>
+
+
 
 </body>
 </html>
