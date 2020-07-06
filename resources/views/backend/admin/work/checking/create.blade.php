@@ -153,7 +153,6 @@
 @endsection
 @section('style')
     <link rel="stylesheet" href="{{asset('')}}assets/js/plugins/flatpickr/flatpickr.min.css">
-    <link rel="stylesheet" href="{{asset('')}}assets/js/plugins/select2/css/select2.min.css">
 @endsection
 @section('script')
     <script>
@@ -171,10 +170,9 @@
         });
     </script>
     <script src="{{asset('')}}assets/js/plugins/flatpickr/flatpickr.min.js"></script>
-    <script src="{{asset('')}}assets/js/plugins/select2/js/select2.full.min.js"></script>
 
 
-    <script>jQuery(function(){ Dashmix.helpers(['flatpickr','select2']); });</script>
+    <script>jQuery(function(){ Dashmix.helpers(['flatpickr']); });</script>
     <script>
         $('#room_type').on('change', function(e){
             console.log(e);

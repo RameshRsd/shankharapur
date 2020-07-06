@@ -71,12 +71,12 @@
                         <div class="header_inner d-flex flex-row align-items-center justify-content-start">
                             <nav class="main_nav">
                                 <ul class="d-flex flex-row align-items-center justify-content-start">
-                                    <li class="active"><a href="{{url('')}}"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>home</span></div></a></li>
-                                    <li><a href="{{url('about-us')}}"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>about us</span></div></a></li>
-                                    <li><a href="{{url('rooms')}}"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>rooms</span></div></a></li>
-                                    <li><a href="{{url('news')}}"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>news</span></div></a></li>
-                                    <li><a href="{{url('contact-us')}}"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>contact</span></div></a></li>
-                                    <li><a href="{{url('login')}}"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span title="Login"><i class="fa fa-sign-in"></i></span></div></a></li>
+                                    <li @if(request()->segment('1')=='') class="active" @endif><a href="{{url('')}}"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>home</span></div></a></li>
+                                    <li @if(request()->segment('1')=='about-us') class="active" @endif><a href="{{url('about-us')}}"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>about us</span></div></a></li>
+                                    <li @if(request()->segment('1')=='rooms') class="active" @endif><a href="{{url('rooms')}}"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>rooms</span></div></a></li>
+                                    {{--<li @if(request()->segment('1')=='news') class="active" @endif><a href="{{url('news')}}"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>news</span></div></a></li>--}}
+                                    <li @if(request()->segment('1')=='contact-us') class="active" @endif><a href="{{url('contact-us')}}"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span>contact</span></div></a></li>
+                                    <li @if(request()->segment('1')=='login') class="active" @endif><a href="{{url('login')}}"><div class="nav_item d-flex flex-column align-items-center justify-content-center"><span title="Login"><i class="fa fa-sign-in"></i></span></div></a></li>
                                 </ul>
                             </nav>
                             <a href="#" class="button_container header_button"><div class="button text-center"><span>Book Your Stay</span></div></a>
@@ -130,15 +130,16 @@
                     <div class="footer_menu">
                         <ul class="d-flex flex-row align-items-start justify-content-start">
                             <li><a href="{{url('')}}">Home</a></li>
-                            <li><a href="javascript:void(0)">About us</a></li>
-                            <li><a href="javascript:void(0)">Rooms</a></li>
-                            <li><a href="javascript:void(0)">News</a></li>
-                            <li><a href="javascript:void(0)">Contact</a></li>
+                            <li><a href="{{url('about-us')}}">About us</a></li>
+                            <li><a href="{{url('rooms')}}">Rooms</a></li>
+                            {{--<li><a href="{{url('news')}}">News</a></li>--}}
+                            <li><a href="{{url('contact-us')}}">Contact</a></li>
                         </ul>
-                        <div class="footer_menu_text">
-                            <p>Praesent fermentum ligula in dui imperdiet, vel tempus nulla ultricies. Phasellus at commodo ligula.</p>
-                        </div>
+                        {{--<div class="footer_menu_text">--}}
+                            {{--<p>Praesent fermentum ligula in dui imperdiet, vel tempus nulla ultricies. Phasellus at commodo ligula.</p>--}}
+                        {{--</div>--}}
                         <div class="social_link">
+                            <hr>
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-twitter"></i></a>
                             <a href="#"><i class="fa fa-instagram"></i></a>
@@ -174,10 +175,10 @@
                 </div>
                 <div class="col-lg-12">
                     <div class="copyright text-lg-center pt-5"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        <p>&copy;{{date('Y')}} Hotel Shankharapur. All Rights Reserved. <b>Design By:</b> <a href="#">Genius Nepal</a></p>
+                        <p>&copy;{{date('Y')}} {{$contactDetail->name}}. All Rights Reserved.</p>
                     </div>
                 </div>
-                            </div>
+            </div>
         </div>
     </footer>
 </div>

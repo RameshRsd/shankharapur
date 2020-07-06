@@ -14,4 +14,8 @@ class Accommodation extends Model
         return $this->hasMany(Room::class,'accommodation_id');
     }
 
+    public function availableRooms(){
+        return $this->hasMany(Room::class,'accommodation_id')->where('room_status','CheckedOut');
+    }
+
 }

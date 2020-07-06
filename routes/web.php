@@ -15,13 +15,24 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace'=>'frontend'],function (){
     Route::get('','HomeController@index');
-    Route::get('rooms','HomeController@rooms');
+//    Route::get('rooms','HomeController@rooms');
     Route::get('room-details','HomeController@room_details');
     Route::get('about-us','HomeController@about_us');
-    Route::get('news','HomeController@news');
+//    Route::get('news','HomeController@news');
     Route::get('contact-us','HomeController@contact_us');
 
     Route::get('getRoom','HomeController@getRoom');
+
+    Route::group(['prefix'=>'rooms','namespace'=>'room'],function (){
+       Route::get('','RoomController@index');
+       Route::get('{slug}','RoomController@view');
+       Route::get('{slug}/{id}/book','RoomController@booking');
+       Route::post('{slug}/{id}/book','RoomController@bookingStore');
+    });
+
+    Route::group(['prefix'=>'news','namespace'=>'news'],function (){
+       Route::get('','NewsController@index');
+    });
 });
 Route::group(['middleware'=>'guest'],function(){
     Route::get('login','frontend\\LoginController@getLogin')->name('login');
@@ -41,6 +52,17 @@ Route::group(['namespace'=>'backend'],function(){
             Route::post('edit-profile','ProfileController@update');
             Route::post('changePassword','ProfileController@changePassword');
             Route::post('updatePhoto','ProfileController@updatePhoto');
+        });
+        Route::group(['prefix'=>'gallery-manage','namespace'=>'gallery'],function (){
+            Route::get('','GalleryController@index');
+            Route::group(['prefix'=>'images'],function (){
+               Route::get('','ImageController@index');
+               Route::post('','ImageController@store');
+               Route::get('{id}/delete','ImageController@delete');
+               Route::post('{id}/update','ImageController@update');
+               Route::get('categories','CategoryController@index');
+               Route::post('categories','CategoryController@store');
+            });
         });
         Route::group(['prefix'=>'work-flows','namespace'=>'work'],function (){
             Route::get('','WorkController@index');

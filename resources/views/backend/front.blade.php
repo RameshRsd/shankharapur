@@ -25,9 +25,11 @@
     <link rel="stylesheet" id="css-main" href="{{asset('css/customFonts.css')}}">
     <link rel="stylesheet" id="css-main" href="{{asset('css/style.css')}}">
     @yield('style')
+    <link rel="stylesheet" href="{{asset('')}}assets/js/plugins/select2/css/select2.min.css">
 
     <link rel="stylesheet" id="css-main" href="{{asset('')}}assets/css/dashmix.min.css">
     <link rel="stylesheet" href="{{asset('')}}assets/css/themes/xsmooth.min.css">
+
     <script src="https://kit.fontawesome.com/f9dfcdd6a8.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -45,6 +47,9 @@
     webpack is putting everything together at {{asset('')}}assets/_es6/main/app.js
 -->
 <script src="{{asset('')}}assets/js/dashmix.app.min.js"></script>
+<script src="{{asset('')}}assets/js/plugins/select2/js/select2.full.min.js"></script>
+<script>jQuery(function(){ Dashmix.helpers(['select2']); });</script>
+
 @yield('script')
 <script>
     Laravel = {

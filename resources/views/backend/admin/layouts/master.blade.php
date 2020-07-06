@@ -110,9 +110,9 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-main-heading">Profile Manage</li>
+                    <li class="nav-main-heading">General Manage</li>
                     <li class="nav-main-item  @if(request()->segment('2')=='profile-manage') open @endif">
-                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="{{url('admin/profile-manage')}}">
+                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="javascript:void(0)">
                             <i class="nav-main-link-icon fa fa-user"></i>
                             <span class="nav-main-link-name">Profile</span>
                         </a>
@@ -132,7 +132,7 @@
                         </ul>
                     </li>
                     <li class="nav-main-item  @if(request()->segment('2')=='guest-manage') open @endif">
-                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="{{url('admin/profile-manage')}}">
+                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="javascript:void(0)">
                             <i class="nav-main-link-icon fa fa-user"></i>
                             <span class="nav-main-link-name">Guest Manager</span>
                         </a>
@@ -147,6 +147,26 @@
                                 <a class="nav-main-link @if(request()->segment('3')=='add-guest') active @endif" href="{{url('admin/guest-manage/add-guest')}}">
                                     <i class="nav-main-link-icon fa fa-plus-circle"></i>
                                     <span class="nav-main-link-name">New Guest</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-main-item  @if(request()->segment('2')=='gallery-manage') open @endif">
+                        <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="javascript:void(0)">
+                            <i class="nav-main-link-icon fa fa-images"></i>
+                            <span class="nav-main-link-name">Gallery Manager</span>
+                        </a>
+                        <ul class="nav-main-submenu">
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('3')=='images') active @endif" href="{{url('admin/gallery-manage/images')}}">
+                                    <i class="nav-main-link-icon fa fa-images"></i>
+                                    <span class="nav-main-link-name">Image List</span>
+                                </a>
+                            </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('3')=='sliders') active @endif" href="{{url('admin/gallery-manage/sliders')}}">
+                                    <i class="nav-main-link-icon fa fa-sliders"></i>
+                                    <span class="nav-main-link-name">Slider Images</span>
                                 </a>
                             </li>
                         </ul>

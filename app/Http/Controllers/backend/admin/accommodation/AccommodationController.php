@@ -48,7 +48,7 @@ class AccommodationController extends Controller
         $accom = new Accommodation();
         $accom->user_id = Auth::user()->id;
         $accom->name = $request->name;
-        $accom->slug = Str::slug($request->name);
+//        $accom->slug = Str::slug($request->name);
         $accom->rate = $request->rate;
         $accom->rate_type = $request->rate_type;
         $accom->details = $request->details;
