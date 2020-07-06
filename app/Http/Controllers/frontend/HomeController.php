@@ -5,6 +5,8 @@ namespace App\Http\Controllers\frontend;
 use App\Http\Controllers\Controller;
 use App\Model\Accommodation;
 use App\Model\Admin;
+use App\Model\Gallery;
+use App\Model\GalleryCategory;
 use App\Model\Room;
 use App\User;
 use Illuminate\Http\Request;
@@ -15,7 +17,11 @@ class HomeController extends Controller
         $info = Admin::find(1);
         $title = $info->name.' | Best Memories start here';
         $rooms = Accommodation::limit(3)->get();
-        return view('frontend.welcome',compact('title','rooms','info'));
+        $galleryIds = GalleryCategory::where('category_id',1)->select('gallery_id');
+        $sliders = Gallery::whereIn('id',$galleryIds)->orderBy('id','DESC')->limit(8)->get();
+        $otherGalleryIds = GalleryCategory::where('category_id','!=',1)->select('gallery_id');
+        $otherSliders = Gallery::whereIn('id',$otherGalleryIds)->limit(8)->orderBy('id','DESC')->get();
+        return view('frontend.welcome',compact('title','rooms','info','sliders','otherSliders'));
     }
     public function about_us(){
         $info = Admin::find(1);

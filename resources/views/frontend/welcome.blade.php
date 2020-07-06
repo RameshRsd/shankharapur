@@ -3,18 +3,19 @@
     <!-- Home -->
     <div class="home">
         <!-- Home Slider -->
-        <div class="home_slider_container">
+        <div class="home_slider_container bg-white-50">
             <div class="owl-carousel owl-theme home_slider">
+                @foreach($sliders as $key=>$slider)
                 <!-- Slide -->
                 <div class="owl-item">
-                    <div class="background_image" style="background-image:url({{asset('themes')}}/images/home_slider_1.jpg)"></div>
+                    <div class="background_image" style="background-image:url({{asset('public/gallery'.'/'.$slider->image)}})"></div>
                     <div class="home_content_container">
                         <div class="container">
                             <div class="row">
                                 <div class="col">
                                     <div class="home_content text-center">
                                         <div class="home_subtitle">{{$info->name}}</div>
-                                        <div class="home_title">Amazing Services, Location & Facilities</div>
+                                        <div class="home_title">{{$slider->title}}</div>
                                         <a href="{{url('rooms')}}" class="button_container home_button"><div class="button text-center"><span>Book Your Stay</span></div></a>
                                     </div>
                                 </div>
@@ -23,42 +24,7 @@
                     </div>
                 </div>
                 <!-- Slide -->
-                <!-- Slide -->
-                <div class="owl-item">
-                    <div class="background_image" style="background-image:url({{asset('themes')}}/images/home_slider_1.jpg)"></div>
-                    <div class="home_content_container">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="home_content text-center">
-                                        <div class="home_subtitle">{{$info->name}}</div>
-                                        <div class="home_title">Amazing Services, Location & Facilities</div>
-                                        <a href="{{url('rooms')}}" class="button_container home_button"><div class="button text-center"><span>Book Your Stay</span></div></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Slide -->
-                <!-- Slide -->
-                <div class="owl-item">
-                    <div class="background_image" style="background-image:url({{asset('themes')}}/images/home_slider_1.jpg)"></div>
-                    <div class="home_content_container">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="home_content text-center">
-                                        <div class="home_subtitle">{{$info->name}}</div>
-                                        <div class="home_title">Amazing Services, Location & Facilities</div>
-                                        <a href="{{url('rooms')}}" class="button_container home_button"><div class="button text-center"><span>Book Your Stay</span></div></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Slide -->
+                @endforeach
 
             </div>
 
@@ -66,9 +32,9 @@
 
             <div class="home_slider_dots">
                 <ul id="home_slider_custom_dots" class="home_slider_custom_dots">
-                    <li class="home_slider_custom_dot active">01</li>
-                    <li class="home_slider_custom_dot">02</li>
-                    <li class="home_slider_custom_dot">03</li>
+                    @foreach($sliders as $ikey=>$slider)
+                    <li class="home_slider_custom_dot @if($ikey==0) active @endif">{{++$ikey}}</li>
+                    @endforeach
                 </ul>
             </div>
 
@@ -166,19 +132,11 @@
                         <div class="owl-carousel owl-theme big_room_slider">
 
                             <!-- Slide -->
+                            @foreach($otherSliders as $otherSlider)
                             <div class="owl-item">
-                                <div class="background_image" style="background-image:url({{asset('themes')}}/images/img_1.jpg)"></div>
+                                <div class="background_image" style="background-image:url({{asset('public/gallery'.'/'.$otherSlider->image)}})"></div>
                             </div>
-
-                            <!-- Slide -->
-                            <div class="owl-item">
-                                <div class="background_image" style="background-image:url({{asset('themes')}}/images/img_1.jpg)"></div>
-                            </div>
-
-                            <!-- Slide -->
-                            <div class="owl-item">
-                                <div class="background_image" style="background-image:url({{asset('themes')}}/images/img_1.jpg)"></div>
-                            </div>
+                            @endforeach
 
                         </div>
 
@@ -273,26 +231,12 @@
 
             <!-- Gallery Slider -->
             <div class="owl-carousel owl-theme gallery_slider magic_up">
+                @foreach($otherSliders as $otherSlider)
                 <div class="owl-item gallery_item">
                     <div class="gallery_select d-flex flex-column align-items-center justify-content-center"><div>+</div></div>
-                    <a class="colorbox" href="{{asset('themes')}}/images/gallery_1.jpg"><img src="{{asset('themes')}}/images/gallery_1.jpg" alt=""></a>
+                    <a class="colorbox" href="{{asset('public/gallery'.'/'.$otherSlider->image)}}"><img src="{{asset('public/gallery'.'/'.$otherSlider->image)}}" alt="{{$info->name}}"></a>
                 </div>
-                <div class="owl-item gallery_item">
-                    <div class="gallery_select d-flex flex-column align-items-center justify-content-center"><div>+</div></div>
-                    <a class="colorbox" href="{{asset('themes')}}/images/gallery_2.jpg"><img src="{{asset('themes')}}/images/gallery_2.jpg" alt=""></a>
-                </div>
-                <div class="owl-item gallery_item">
-                    <div class="gallery_select d-flex flex-column align-items-center justify-content-center"><div>+</div></div>
-                    <a class="colorbox" href="{{asset('themes')}}/images/gallery_3.jpg"><img src="{{asset('themes')}}/images/gallery_3.jpg" alt=""></a>
-                </div>
-                <div class="owl-item gallery_item">
-                    <div class="gallery_select d-flex flex-column align-items-center justify-content-center"><div>+</div></div>
-                    <a class="colorbox" href="{{asset('themes')}}/images/gallery_4.jpg"><img src="{{asset('themes')}}/images/gallery_4.jpg" alt=""></a>
-                </div>
-                <div class="owl-item gallery_item">
-                    <div class="gallery_select d-flex flex-column align-items-center justify-content-center"><div>+</div></div>
-                    <a class="colorbox" href="{{asset('themes')}}/images/gallery_5.jpg"><img src="{{asset('themes')}}/images/gallery_5.jpg" alt=""></a>
-                </div>
+                @endforeach
             </div>
 
         </div>
