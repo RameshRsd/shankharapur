@@ -7,7 +7,7 @@
         <!-- Image credit: https://unsplash.com/@christoph -->
         <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{{asset('public/themes/images/rooms.jpg')}}" data-speed="0.8"></div>
         <div class="home_content_deT">
-            <div class="home_title text-danger">{{$heading}}</div>
+            <div class="home_title">{{$heading}}</div>
         </div>
     </div>
     <!-- Intro -->

@@ -299,11 +299,12 @@ section
 	top: 0;
 	left: 0;
 	width: 100%;
-	background: #5a2360;
+	background: #ffffff;
 	z-index: 100;
 }
 .header_content
 {
+	box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
 	width: 100%;
 	height: 100%;
 }
@@ -314,7 +315,7 @@ section
 	left: 40px;
 	width: 265px;
 	height: 100%;
-	background: #5a2360;
+	background: transparent;
 	z-index: 1;
 }
 .logo
@@ -364,7 +365,7 @@ section
 .header_inner
 {
 	width: 100%;
-	height: 70px;
+	height: 80px;
 	padding-left: 307px;
 	-webkit-transition: all 600ms ease;
 	-moz-transition: all 600ms ease;
@@ -395,11 +396,11 @@ section
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
 }
-.main_nav ul li.active,
-.main_nav ul li:hover
-{
-	background: #5a2360;
-}
+/*.main_nav ul li.active,*/
+/*.main_nav ul li:hover*/
+/*{*/
+	/*background: #5a2360;*/
+/*}*/
 .main_nav ul li a
 {
 	display: inline-block;
@@ -413,7 +414,7 @@ section
 {
 	font-size: 14px;
 	font-weight: 600;
-	color: #FFFFFF;
+	color: #01274b;
 	white-space: nowrap;
 	text-transform: uppercase;
 }
@@ -422,10 +423,10 @@ section
 	display: block;
 	position: absolute;
 	left: 0;
-	bottom: 1px;
+	bottom: 7px;
 	width: 100%;
 	height: 3px;
-	background: #d6baa0;
+	background: #ff0000;
 	content: '';
 	visibility: hidden;
 	opacity: 0;
@@ -690,7 +691,8 @@ section
 .home_title
 {
 	font-family: 'Playfair Display', serif;
-	font-size: 50px;
+	font-size: 35px;
+	font-weight: bold;
 	line-height: 1.1;
 	color: #FFFFFF;
 	margin-top: 9px;
@@ -1068,7 +1070,7 @@ section
 }
 .room
 {
-	box-shadow: 0px 23px 35px rgba(4,4,4,0.18);
+	box-shadow: 0px 23px 35px rgba(234, 234, 234, 0.65);
 }
 .room_image
 {
@@ -1157,10 +1159,7 @@ section
 {
 	margin-top: 20px;
 }
-.room
-{
-	box-shadow: 0px 23px 35px rgba(4,4,4,0.18);
-}
+
 .room_image
 {
 	width: 100%;
@@ -1411,15 +1410,15 @@ section
 	display: block;
 	position: absolute;
 	left: 0;
-	bottom: 0px;
+	bottom: 1px;
 	width: 100%;
 	height: 3px;
-	background: #d6baa0;
+	background: #fd0d0d;
 	content: '';
 }
 .newsletter_button:hover
 {
-	background: #d6baa0;
+	background: #01274b;
 }
 .newsletter_input::-webkit-input-placeholder
 {
@@ -1656,7 +1655,7 @@ section
 /**/
 .room_sty {
 	width: 100%;
-	height: 310px;
+	height: 250px;
 }
 .parallax_background {
 	position: absolute;
@@ -1667,7 +1666,7 @@ section
 }
 .parallax-window {
 	min-height: 400px;
-	background: transparent;
+	background: #01274bcc;
 }
 .home_content_deT {
 	width: 100%;

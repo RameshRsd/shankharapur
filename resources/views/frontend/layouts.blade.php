@@ -61,7 +61,7 @@
             <div class="logo_container d-flex flex-column align-items-center justify-content-center">
                 <div class="logo">
                     <a href="{{url('')}}" class="text-center">
-                        <img src="{{asset('property/logo-white.png')}}" alt="" style="width: 100%;">
+                        <img src="{{asset('property/logo_long.png')}}" alt="" style="width: 100%;">
                     </a>
                 </div>
             </div>
