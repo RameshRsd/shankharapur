@@ -33,10 +33,15 @@ Route::group(['namespace'=>'frontend'],function (){
     Route::group(['prefix'=>'news','namespace'=>'news'],function (){
        Route::get('','NewsController@index');
     });
+    Route::get('get_state','AjaxController@getState');
+    Route::get('get_district','AjaxController@getDistrict');
+    Route::get('get_city','AjaxController@getCity');
 });
 Route::group(['middleware'=>'guest'],function(){
     Route::get('login','frontend\\LoginController@getLogin')->name('login');
     Route::post('login','frontend\\LoginController@postLogin');
+    Route::get('sign-up','frontend\\GuestController@create');
+    Route::post('sign-up','frontend\\GuestController@store');
 });
 Route::any('logout', 'Auth\LoginController@logout')->name('logout');
 
@@ -62,6 +67,18 @@ Route::group(['namespace'=>'backend'],function(){
                Route::post('{id}/update','ImageController@update');
                Route::get('categories','CategoryController@index');
                Route::post('categories','CategoryController@store');
+            });
+            Route::group(['prefix'=>'sliders'],function (){
+               Route::get('','SliderController@index');
+               Route::post('','SliderController@store');
+               Route::get('{id}/delete','SliderController@delete');
+               Route::post('{id}/update','SliderController@update');
+            });
+            Route::group(['prefix'=>'categories'],function (){
+               Route::get('','CategoryController@index');
+               Route::post('','CategoryController@store');
+               Route::get('{id}/delete','CategoryController@delete');
+               Route::post('{id}/update','CategoryController@update');
             });
         });
         Route::group(['prefix'=>'work-flows','namespace'=>'work'],function (){

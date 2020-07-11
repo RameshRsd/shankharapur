@@ -169,6 +169,12 @@
                                     <span class="nav-main-link-name">Slider Images</span>
                                 </a>
                             </li>
+                            <li class="nav-main-item">
+                                <a class="nav-main-link @if(request()->segment('3')=='categories') active @endif" href="{{url('admin/gallery-manage/categories')}}">
+                                    <i class="nav-main-link-icon fa fa-tags"></i>
+                                    <span class="nav-main-link-name">Categories</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-main-heading">Settings</li>

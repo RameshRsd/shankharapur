@@ -52,7 +52,7 @@
                 <div class="col-lg-7 room_col magic_up">
                     <div class="">
                         <h4 class="p-2 font-size-base bg-light text-dark text-center">Book Now
-                            <button class="btn btn-danger btn-sm pull-right push"><i class="fa fa-user-plus"></i> Sign Up</button>
+                            <a href="{{url('sign-up'.'?redirectTo='.'rooms'.'/'.$accomodation->slug.'/'.$room->id.'/book')}}" class="btn btn-danger btn-sm pull-right push"><i class="fa fa-user-plus"></i> Sign Up</a>
                         </h4>
                         <form action="" method="post">
                             {{csrf_field()}}
